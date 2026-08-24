@@ -1,0 +1,330 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ crop.crop_name }} Crop Advisory
+    </title>
+    <link rel="stylesheet" href="{% static 'css/result.css' %}">
+
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     AI LOADING
+========================================================= -->
+
+<div id="ai-loading">
+
+    <div class="loading-card">
+
+        <div class="loading-icon">
+            🌱
+        </div>
+
+
+        <h2>
+            Crop Advisory is Preparing
+        </h2>
+
+
+        <p>
+            Please wait while AI analyzes your crop
+            and prepares a practical advisory.
+        </p>
+
+
+        <div id="loading-status">
+            🌱 Analyzing your crop...
+        </div>
+
+
+        <div class="progress-container">
+
+            <div id="progress-bar"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     RESULT
+========================================================= -->
+
+<div id="result-container">
+
+
+    <!-- =====================================================
+         BUTTONS
+    ===================================================== -->
+
+    <div class="report-toolbar">
+
+        <button
+            type="button"
+            class="download-btn"
+            onclick="downloadReport()"
+        >
+            ⬇ Save as PDF
+        </button>
+
+
+
+    </div>
+
+
+    <!-- =====================================================
+         REPORT
+    ===================================================== -->
+
+    <div id="report">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================= -->
+
+        <div class="report-header">
+
+            <h1>
+                🌾 CROP HEALTH REPORT
+            </h1>
+
+
+            <p>
+                Smart Farming Guidance
+            </p>
+
+
+            <p>
+
+                <strong>
+                    REPORT DATE:
+                </strong>
+
+                {{ report_date|date:"d M Y" }}
+
+            </p>
+
+        </div>
+
+
+        <div class="report-content">
+
+
+            <!-- =============================================
+                 CROP INFORMATION
+            ============================================== -->
+
+            <h2>
+                🌱 Crop Information
+            </h2>
+
+
+            <div class="crop-info">
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Crop
+                    </strong>
+
+                    {{ crop.crop_name }}
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Crop Age
+                    </strong>
+
+                    {{ crop.crop_age }} Days
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Location
+                    </strong>
+
+                    {{ crop.location }}
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>
+                        Report Date
+                    </strong>
+
+                    {{ report_date|date:"d M Y" }}
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =============================================
+                 CROP IMAGES
+            ============================================== -->
+
+            <h2>
+                📷 Submitted Crop Photos
+            </h2>
+
+
+            <div class="crop-images">
+
+
+                {% if crop.disease_img_1 %}
+
+                <div class="crop-image-box">
+
+                    <img
+                        src="{{ crop.disease_img_1.url }}"
+                        alt="Crop Image 1"
+                    >
+
+                    <span>
+                        Crop Image 1
+                    </span>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if crop.disease_img_2 %}
+
+                <div class="crop-image-box">
+
+                    <img
+                        src="{{ crop.disease_img_2.url }}"
+                        alt="Crop Image 2"
+                    >
+
+                    <span>
+                        Crop Image 2
+                    </span>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if crop.disease_img_3 %}
+
+                <div class="crop-image-box">
+
+                    <img
+                        src="{{ crop.disease_img_3.url }}"
+                        alt="Crop Image 3"
+                    >
+
+                    <span>
+                        Crop Image 3
+                    </span>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if crop.disease_img_4 %}
+
+                <div class="crop-image-box">
+
+                    <img
+                        src="{{ crop.disease_img_4.url }}"
+                        alt="Crop Image 4"
+                    >
+
+                    <span>
+                        Crop Image 4
+                    </span>
+
+                </div>
+
+                {% endif %}
+
+
+            </div>
+
+
+            <!-- =============================================
+                 FARMER PROBLEM
+            ============================================== -->
+
+            <div class="problem-box">
+
+                <h2>
+                    🔍 Reported Crop Problem
+                </h2>
+
+
+                <p>
+
+                    {{ crop.disease }}
+
+                </p>
+
+            </div>
+
+
+            <!-- =============================================
+                 AI ADVISORY
+            ============================================== -->
+
+            <div id="ai-result">
+
+                <!-- Gemini result will appear here -->
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MARKED.JS
+========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js">
+</script>
+<script>
+    const generateAdviceUrl =
+        "{% url 'generate_advice' %}";
+</script>
+
+<script src="{% static 'scripts/result.js' %}"></script>
+</body>
+
+</html>
