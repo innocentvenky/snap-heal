@@ -7,6 +7,10 @@
 const loadingMessages = [
 
     "🌱 Analyzing your crop...",
+    
+    "📍 Detecting farm location...",
+
+    "🌡️ Analyzing weather conditions...",
 
     "🔍 Studying the reported symptoms...",
 
