@@ -16,19 +16,31 @@ import json
 
 
 def home(request):
-
     if request.method == "POST":
 
         form = Crop_details_from(request.POST,request.FILES)
         if form.is_valid():
             Crop_details.objects.all().delete()
-            crop = form.save()
-            request.session["crop_data"] = str(crop.id)
-
-            return redirect("result")
+            crop=form.save()
+            request.session["crop_data"] = crop.id
+            return redirect("crop_images")
     else:
         form = Crop_details_from()
-    return render(request,"home.html",{"form": form})
+    
+    return render(request,"main_home.html",{"form": form})
+def crop_images(request):
+    crop_id=request.session.get("crop_data")
+    if not crop_id:
+        return redirect("home")
+    crop=Crop_details.objects.get(id=crop_id)
+    if request.method == "POST":
+        crop.disease_img_1 = request.FILES.get("disease_img_1")
+        crop.disease_img_2 = request.FILES.get("disease_img_2")
+        crop.disease_img_3 = request.FILES.get("disease_img_3")
+        crop.disease_img_4 = request.FILES.get("disease_img_4")
+        crop.save()
+        return redirect("result")
+    return render(request,"home.html",{"form": crop})
 
 # RESULT PAGE
 

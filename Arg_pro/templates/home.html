@@ -1,10 +1,10 @@
+
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -12,24 +12,23 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title> Crop Details</title>
+    <title>Crop Photos | Snap-Heal</title>
 
     <link
         rel="stylesheet"
-        href="{% static 'css/home.css' %}"
+        href="{% static 'css/home.css' %}?v=2"
     >
-
 </head>
 
 <body>
 
 <div class="page">
 
-    <!-- ================= MAIN ================= -->
-
     <main class="main">
 
-        <div class="page-heading">
+        <!-- ================= HEADER ================= -->
+
+        <section class="page-heading">
 
             <div class="heading-icon">
                 🌾
@@ -40,16 +39,17 @@
             </h1>
 
             <p>
-                Provide your crop details and upload photos
-                to help us understand the problem.
+                Upload photos of your affected crop
+                to help us identify the problem.
             </p>
 
-        </div>
+        </section>
 
 
         <!-- ================= FORM ================= -->
 
         <form
+            id="cropForm"
             method="POST"
             enctype="multipart/form-data"
             class="crop-form"
@@ -58,497 +58,279 @@
             {% csrf_token %}
 
 
-            <!-- ================= CROP DETAILS ================= -->
+            <!-- ================= CROP PHOTOS ================= -->
 
             <section class="card">
 
                 <div class="card-title">
 
                     <div class="title-icon">
-                        🌱
+                        📷
                     </div>
 
                     <div>
-
                         <h2>
-                            Crop Details
+                            Crop Photos
                         </h2>
 
                         <p>
-                            Basic information about your crop
+                            Upload up to 4 photos of the affected crop
                         </p>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= IMAGE GRID ================= -->
+
+                <div class="image-grid">
+
+
+                    <!-- ================= IMAGE 1 ================= -->
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            name="disease_img_1"
+                            id="disease_img_1"
+                            accept="image/*"
+                            data-preview="preview1"
+                            data-remove="remove1"
+                        >
+
+                        <label
+                            for="disease_img_1"
+                            class="upload-box"
+                        >
+
+                            <div
+                                class="preview"
+                                id="preview1"
+                            >
+
+                                <span class="camera">
+                                    📷
+                                </span>
+
+                                <strong>
+                                    Add Photo 1
+                                </strong>
+
+                                <small>
+                                    Camera or Gallery
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            id="remove1"
+                            aria-label="Remove image 1"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================= IMAGE 2 ================= -->
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            name="disease_img_2"
+                            id="disease_img_2"
+                            accept="image/*"
+                            data-preview="preview2"
+                            data-remove="remove2"
+                        >
+
+                        <label
+                            for="disease_img_2"
+                            class="upload-box"
+                        >
+
+                            <div
+                                class="preview"
+                                id="preview2"
+                            >
+
+                                <span class="camera">
+                                    📷
+                                </span>
+
+                                <strong>
+                                    Add Photo 2
+                                </strong>
+
+                                <small>
+                                    Camera or Gallery
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            id="remove2"
+                            aria-label="Remove image 2"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================= IMAGE 3 ================= -->
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            name="disease_img_3"
+                            id="disease_img_3"
+                            accept="image/*"
+                            data-preview="preview3"
+                            data-remove="remove3"
+                        >
+
+                        <label
+                            for="disease_img_3"
+                            class="upload-box"
+                        >
+
+                            <div
+                                class="preview"
+                                id="preview3"
+                            >
+
+                                <span class="camera">
+                                    📷
+                                </span>
+
+                                <strong>
+                                    Add Photo 3
+                                </strong>
+
+                                <small>
+                                    Camera or Gallery
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            id="remove3"
+                            aria-label="Remove image 3"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================= IMAGE 4 ================= -->
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            name="disease_img_4"
+                            id="disease_img_4"
+                            accept="image/*"
+                            data-preview="preview4"
+                            data-remove="remove4"
+                        >
+
+                        <label
+                            for="disease_img_4"
+                            class="upload-box"
+                        >
+
+                            <div
+                                class="preview"
+                                id="preview4"
+                            >
+
+                                <span class="camera">
+                                    📷
+                                </span>
+
+                                <strong>
+                                    Add Photo 4
+                                </strong>
+
+                                <small>
+                                    Camera or Gallery
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            id="remove4"
+                            aria-label="Remove image 4"
+                        >
+                            ×
+                        </button>
 
                     </div>
 
                 </div>
 
 
-                <div class="details-grid">
+                <!-- ================= TIP ================= -->
 
+                <div class="photo-tip">
 
-                    <!-- Crop Name -->
+                    <span class="tip-icon">
+                        💡
+                    </span>
 
-                    <div class="field">
-
-                        <label for="{{ form.crop_name.id_for_label }}">
-                            Crop Name
-                        </label>
-
-                        <div class="input-box">
-
-                            <span class="input-icon">
-                                🌾
-                            </span>
-
-                            {{ form.crop_name }}
-
-                        </div>
-
-                        {% if form.crop_name.errors %}
-
-                            <div class="error">
-                                {{ form.crop_name.errors }}
-                            </div>
-
-                        {% endif %}
-
-                    </div>
-
-
-                    <!-- Crop Age -->
-
-                    <div class="field">
-
-                        <label for="{{ form.crop_age.id_for_label }}">
-                            Crop Age
-                        </label>
-
-                        <div class="input-box">
-
-                            <span class="input-icon">
-                                📅
-                            </span>
-
-                            {{ form.crop_age }}
-
-                            <span class="input-suffix">
-                                days
-                            </span>
-
-                        </div>
-
-                        {% if form.crop_age.errors %}
-
-                            <div class="error">
-                                {{ form.crop_age.errors }}
-                            </div>
-
-                        {% endif %}
-
-                    </div>
-
-
-                    <!-- Location -->
-
-                    <div class="field location-field">
-
-                        <label for="{{ form.location.id_for_label }}">
-                            Location
-                        </label>
-
-                        <div class="input-box">
-
-                            <span class="input-icon">
-                                📍
-                            </span> 
-
-                            {{ form.location }}
-
-                        </div>
-
-                        <small>
-                            Example: Madanapalle, Andhra Pradesh
-                        </small>
-
-                        {% if form.location.errors %}
-
-                            <div class="error">
-                                {{ form.location.errors }}
-                            </div>
-
-                        {% endif %}
-
-                    </div>
+                    <span>
+                        Upload clear photos showing affected
+                        leaves, fruits or stems for better results.
+                    </span>
 
                 </div>
 
             </section>
 
-
-            <!-- ================= IMAGES ================= -->
-
-  <!-- =========================================================
-     CROP PHOTOS
-========================================================= -->
-
-<section class="card">
-
-    <div class="card-title">
-
-        <div class="title-icon">
-            📷
-        </div>
-
-        <div>
-
-            <h2>
-                Crop Photos
-            </h2>
-
-            <p>
-                Upload up to 4 photos of the affected crop
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="image-grid">
-
-
-        <!-- =================================================
-             IMAGE 1
-        ================================================== -->
-
-        <div class="image-upload">
-
-            <input
-                type="file"
-                name="{{ form.disease_img_1.name }}"
-                id="{{ form.disease_img_1.id_for_label }}"
-
-                data-preview="preview1"
-                data-remove="remove1"
-
-                accept="image/*"
-                capture="environment"
-
-                hidden
-            >
-
-
-            <label
-                for="{{ form.disease_img_1.id_for_label }}"
-                class="upload-box"
-                id="uploadBox1"
-            >
-
-                <div
-                    class="preview"
-                    id="preview1"
-                >
-
-                    <span class="camera">
-                        📷
-                    </span>
-
-                    <strong>
-                        Add Photo
-                    </strong>
-
-                    <small>
-                        Camera or Gallery
-                    </small>
-
-                </div>
-
-
-                <span
-                    class="remove"
-                    id="remove1"
-                    style="display:none;"
-                >
-                    ×
-                </span>
-
-            </label>
-
-        </div>
-
-
-
-        <!-- =================================================
-             IMAGE 2
-        ================================================== -->
-
-        <div class="image-upload">
-
-            <input
-                type="file"
-                name="{{ form.disease_img_2.name }}"
-                id="{{ form.disease_img_2.id_for_label }}"
-
-                data-preview="preview2"
-                data-remove="remove2"
-
-                accept="image/*"
-                capture="environment"
-
-                hidden
-            >
-
-
-            <label
-                for="{{ form.disease_img_2.id_for_label }}"
-                class="upload-box"
-                id="uploadBox2"
-            >
-
-                <div
-                    class="preview"
-                    id="preview2"
-                >
-
-                    <span class="camera">
-                        📷
-                    </span>
-
-                    <strong>
-                        Add Photo
-                    </strong>
-
-                    <small>
-                        Camera or Gallery
-                    </small>
-
-                </div>
-
-
-                <span
-                    class="remove"
-                    id="remove2"
-                    style="display:none;"
-                >
-                    ×
-                </span>
-
-            </label>
-
-        </div>
-
-
-
-        <!-- =================================================
-             IMAGE 3
-        ================================================== -->
-
-        <div class="image-upload">
-
-            <input
-                type="file"
-                name="{{ form.disease_img_3.name }}"
-                id="{{ form.disease_img_3.id_for_label }}"
-
-                data-preview="preview3"
-                data-remove="remove3"
-
-                accept="image/*"
-                capture="environment"
-
-                hidden
-            >
-
-
-            <label
-                for="{{ form.disease_img_3.id_for_label }}"
-                class="upload-box"
-                id="uploadBox3"
-            >
-
-                <div
-                    class="preview"
-                    id="preview3"
-                >
-
-                    <span class="camera">
-                        📷
-                    </span>
-
-                    <strong>
-                        Add Photo
-                    </strong>
-
-                    <small>
-                        Camera or Gallery
-                    </small>
-
-                </div>
-
-
-                <span
-                    class="remove"
-                    id="remove3"
-                    style="display:none;"
-                >
-                    ×
-                </span>
-
-            </label>
-
-        </div>
-
-
-
-        <!-- =================================================
-             IMAGE 4
-        ================================================== -->
-
-        <div class="image-upload">
-
-            <input
-                type="file"
-                name="{{ form.disease_img_4.name }}"
-                id="{{ form.disease_img_4.id_for_label }}"
-
-                data-preview="preview4"
-                data-remove="remove4"
-
-                accept="image/*"
-                capture="environment"
-
-                hidden
-            >
-
-
-            <label
-                for="{{ form.disease_img_4.id_for_label }}"
-                class="upload-box"
-                id="uploadBox4"
-            >
-
-                <div
-                    class="preview"
-                    id="preview4"
-                >
-
-                    <span class="camera">
-                        📷
-                    </span>
-
-                    <strong>
-                        Add Photo
-                    </strong>
-
-                    <small>
-                        Camera or Gallery
-                    </small>
-
-                </div>
-
-
-                <span
-                    class="remove"
-                    id="remove4"
-                    style="display:none;"
-                >
-                    ×
-                </span>
-
-            </label>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         PHOTO TIP
-    ====================================================== -->
-
-    <div class="photo-tip">
-
-        💡
-
-        <span>
-            On mobile, you can take a photo using the camera
-            or choose an existing photo from your gallery.
-            For better results, upload clear photos showing
-            affected leaves, fruits or stems.
-        </span>
-
-    </div>
-
-</section>
-
-            <!-- ================= PROBLEM ================= -->
-
-            <section class="card">
-
-                <div class="card-title">
-
-                    <div class="title-icon">
-                        📝
-                    </div>
-
-                    <div>
-
-                        <h2>
-                            Describe the Problem
-                        </h2>
-
-                        <p>
-                            Tell us what you are observing in your crop
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="problem-field">
-
-                    {{ form.disease }}
-
-                    <div class="character-info">
-
-                        <span>
-                            Describe symptoms, color changes,
-                            insects, spots, etc.
-                        </span>
-
-                        <span id="charCount">
-                            0 / 500
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                {% if form.disease.errors %}
-
-                    <div class="error">
-                        {{ form.disease.errors }}
-                    </div>
-
-                {% endif %}
-
-            </section>
 
 
             <!-- ================= SUBMIT ================= -->
 
-            <div class="submit-section">
+            <section class="submit-section">
 
                 <div class="privacy">
-
                     🔒 Your information is secure and private.
-
                 </div>
+
+
                 <button
                     type="submit"
                     class="analyze-button"
+                    id="submitButton"
                 >
 
                     <span>
@@ -561,19 +343,26 @@
 
                 </button>
 
-            </div>
+            </section>
 
         </form>
 
     </main>
 
-
-
 </div>
 
 
-<script src="{% static 'scripts/home.js' %}"></script>
+<!-- IMPORTANT:
+     Put this file at:
+     static/scripts/home.js
+-->
+
+<script
+    src="{% static 'scripts/home.js' %}?v=2"
+    defer
+></script>
 
 </body>
 
 </html>
+

@@ -21,7 +21,8 @@ from django.conf.urls.static import static
 from Arg_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",views.home),
+    path("",views.home,name="home"),
+    path("crop-images/",views.crop_images,name="crop_images"),
     path("result/",views.disease_solution,name='result'),
     path("generate-advice/",views.generate_crop_advice,name="generate_advice"),
 

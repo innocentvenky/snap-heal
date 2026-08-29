@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snap-Heal Voice Assistant</title>
+    <link rel="stylesheet" href="{% static 'css/main_home.css' %}">
+</head>
+<body>
+
+<div class="card">
+    <div class="brand-header">
+        <div class="brand-logo">📸 Snap-Heal</div>
+        <p class="brand-tagline">Your Digital Crop Doctor • మీ డిజిటల్ పంట వైద్యుడు</p>
+    </div>
+    
+    <div class="form-group">
+        <label for="langSelect">Choose Voice Language / భాషను ఎంచుకోండి:</label>
+        <select id="langSelect">
+            <option value="en-IN">English (India)</option>
+            <option value="te-IN">Telugu (తెలుగు)</option>
+            <option value="hi-IN">Hindi (हिंदी)</option>
+        </select>
+    </div>
+
+    <div id="statusBox" class="status-box">Welcome to Snap-Heal! Tap the 🎙️ button on any row to use your voice.</div>
+
+    <!-- 1. CROP NAME BLOCK -->
+      <form method="POST" class="crop-form">
+        {% csrf_token %}
+    <div class="form-group">
+        <label>Crop Name / పంట పేరు </label>
+        <div class="input-container">
+            <input type="text" id="cropName"  name="crop_name" placeholder="Type or click mic to speak...">
+            <button type="button" class="mic-btn" onclick="activateBlockVoice('cropName', 'cropName', 'listeningName')">🎙️</button>
+        </div>
+    </div>
+
+    <!-- 2. CROP AGE BLOCK -->
+    <div class="form-group">
+        <label>Crop Age / పంట వయస్సు </label>
+        <div class="input-container">
+            <input type="text" id="cropAge" name="crop_age" placeholder="Type or click mic to speak...">
+            <button type="button" class="mic-btn" onclick="activateBlockVoice('cropAge', 'askAge', 'listeningAge')">🎙️</button>
+        </div>
+    </div>
+
+    <!-- 3. LOCATION BLOCK -->
+    <div class="form-group">
+        <label>Location / ప్రాంతం లేదా గ్రామం </label>
+        <div class="input-container">
+            <input type="text" id="location" name="location" placeholder="Type or click mic to speak...">
+            <button type="button" class="mic-btn" onclick="activateBlockVoice('location', 'askLoc', 'listeningLoc')">🎙️</button>
+        </div>
+    </div>
+
+    <!-- 4. PROBLEM DESCRIPTION BLOCK -->
+    <div class="form-group">
+        <label>Crop Problem / పంట తెగులు లేదా సమస్య </label>
+        <div class="input-container">
+            <textarea id="problem" name="disease" placeholder="Type or click mic to speak..."></textarea>
+            <button type="button" class="mic-btn" onclick="activateBlockVoice('problem', 'askProb', 'listeningProb')">🎙️</button>
+        </div>
+    </div>
+
+    <button id="saveBtn" class="submit-btn">💾 Save and Diagnose Crop Health</button>
+</div>
+</form>
+
+<script src="{% static 'scripts/main_home.js' %}">
+   
+</script>
+</body> 
+</html>
+
+
+

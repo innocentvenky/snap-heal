@@ -1,564 +1,242 @@
 
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 
-html,
-body {
+html {
     width: 100%;
     min-height: 100%;
 }
 
 
 body {
-
-    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-
-    background: #173d24;
-
-    color: #203629;
-
-    -webkit-font-smoothing: antialiased;
-
-}
-
-
-/* =========================================
-   PAGE BACKGROUND
-========================================= */
-
-.page {
-
+    width: 100%;
     min-height: 100vh;
 
-    background-image:linear-gradient(rgba(12, 48, 25, 0.48),rgba(12, 48, 25, 0.68)),
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    url("../images/farm-background.jpg");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    background-attachment: fixed;
-
+    background: #f5f8f5;
+    color: #263326;
 }
 
 
+/* =========================================================
+   PAGE
+========================================================= */
 
-/* =========================================
-   BRAND
-========================================= */
+.page {
+    width: 100%;
+    min-height: 100vh;
 
-.brand {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    text-decoration: none;
-
-    color: #ffffff;
-
+    padding: 40px 20px;
 }
 
-
-.brand-icon {
-
-    width: 36px;
-
-    height: 36px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 10px;
-
-    background:
-        rgba(255, 255, 255, 0.15);
-
-    font-size: 20px;
-
-}
-
-
-.brand-name {
-
-    font-size: 19px;
-
-    font-weight: 700;
-
-    letter-spacing: 0.4px;
-
-}
-
-
-    
-
-
-/* =========================================
-   PROFILE
-========================================= */
-
-.profile {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    color: #ffffff;
-
-    font-size: 14px;
-
-}
-
-
-.profile-avatar {
-
-    width: 35px;
-
-    height: 35px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.18);
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.25);
-
-    font-weight: 600;
-
-}
-
-
-/* =========================================
-   MAIN
-========================================= */
 
 .main {
-
     width: 100%;
-
     max-width: 900px;
 
-    margin: auto;
-
-    padding:
-        65px 20px 70px;
-
+    margin: 0 auto;
 }
 
 
-/* =========================================
+/* =========================================================
    PAGE HEADING
-========================================= */
+========================================================= */
 
 .page-heading {
-
     text-align: center;
-
-    color: #ffffff;
-
-    margin-bottom: 35px;
-
+    margin-bottom: 30px;
 }
 
 
 .heading-icon {
-
-    font-size: 34px;
-
-    margin-bottom: 8px;
-
+    font-size: 48px;
+    margin-bottom: 10px;
 }
 
 
 .page-heading h1 {
-
-    font-size: 36px;
-
+    font-size: 32px;
     font-weight: 700;
-
-    letter-spacing: -0.7px;
 
     margin-bottom: 10px;
 
+    color: #1f3b21;
 }
 
 
 .page-heading p {
-
-    max-width: 560px;
-
-    margin: auto;
-
-    color:
-        rgba(255, 255, 255, 0.82);
-
-    font-size: 14px;
-
+    font-size: 16px;
     line-height: 1.6;
 
+    color: #667066;
+
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 
-/* =========================================
-   FORM
-========================================= */
-
-.crop-form {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 18px;
-
-}
-
-
-/* =========================================
+/* =========================================================
    CARD
-========================================= */
+========================================================= */
 
 .card {
+    width: 100%;
 
-    padding: 26px;
+    background: #ffffff;
 
-    background:
-        rgba(255, 255, 255, 0.94);
+    border-radius: 18px;
 
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.7);
-
-    border-radius: 19px;
+    padding: 30px;
 
     box-shadow:
-        0 18px 50px
-        rgba(0, 0, 0, 0.16);
-
+        0 5px 25px rgba(0, 0, 0, 0.06);
 }
 
 
-/* =========================================
+/* =========================================================
    CARD TITLE
-========================================= */
+========================================================= */
 
 .card-title {
-
     display: flex;
-
     align-items: center;
 
-    gap: 13px;
+    gap: 15px;
 
-    margin-bottom: 24px;
-
+    margin-bottom: 25px;
 }
 
 
 .title-icon {
-
-    width: 45px;
-
-    height: 45px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #edf7e8;
+    width: 48px;
+    height: 48px;
 
     border-radius: 12px;
 
-    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    background: #e9f5e9;
+
+    font-size: 25px;
+
+    flex-shrink: 0;
 }
 
 
 .card-title h2 {
+    font-size: 22px;
 
-    color: #203c29;
+    margin-bottom: 5px;
 
-    font-size: 18px;
-
-    font-weight: 650;
-
-    margin-bottom: 3px;
-
+    color: #253b27;
 }
 
 
 .card-title p {
+    font-size: 14px;
 
-    color: #7b8780;
-
-    font-size: 12px;
-
+    color: #747c74;
 }
 
 
-/* =========================================
-   DETAILS GRID
-========================================= */
+/* =========================================================
+   IMAGE GRID
+========================================================= */
 
-.details-grid {
+.image-grid {
+    width: 100%;
 
     display: grid;
 
     grid-template-columns:
-        1fr
-        1fr;
+        repeat(2, minmax(0, 1fr));
 
-    gap: 18px;
-
+    gap: 20px;
 }
 
 
-.location-field {
+/* =========================================================
+   IMAGE UPLOAD
+========================================================= */
 
-    grid-column:
-        1 / -1;
-
-}
-
-
-/* =========================================
-   FIELD
-========================================= */
-
-.field {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 7px;
-
-}
-
-
-.field label {
-
-    color: #526159;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-}
-
-
-.field small {
-
-    color: #909a94;
-
-    font-size: 10px;
-
-}
-
-
-/* =========================================
-   INPUT BOX
-========================================= */
-
-.input-box {
-
+.image-upload {
     position: relative;
-
-    height: 52px;
-
-    display: flex;
-
-    align-items: center;
-
-    border:
-        1px solid #d9e0db;
-
-    border-radius: 11px;
-
-    background: #ffffff;
-
-    transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
-
-}
-
-
-.input-box:focus-within {
-
-    border-color: #4c8a43;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(76, 138, 67, 0.10);
-
-}
-
-
-.input-icon {
-
-    margin-left: 14px;
-
-    font-size: 16px;
-
-    flex-shrink: 0;
-
-}
-
-
-/* =========================================
-   DJANGO GENERATED INPUTS
-========================================= */
-
-.input-box input {
 
     width: 100%;
 
-    height: 100%;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    padding:
-        0 14px 0 10px;
-
-    color: #263a2c;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
+    min-width: 0;
 }
 
 
-.input-box input::placeholder {
+/* =========================================================
+   REAL FILE INPUT
+========================================================= */
 
-    color: #a2aaa5;
+/*
+   IMPORTANT:
 
-}
+   Do NOT use:
+   pointer-events: none;
 
+   We hide the input visually but keep it
+   functional.
+*/
 
-.input-box input[type="number"] {
-
-    padding-right: 60px;
-
-}
-
-
-/* =========================================
-   CROP AGE SUFFIX
-========================================= */
-
-.input-suffix {
-
+.image-upload input[type="file"] {
     position: absolute;
 
-    right: 14px;
+    width: 1px;
+    height: 1px;
 
-    color: #7e8983;
+    opacity: 0;
 
-    font-size: 11px;
+    overflow: hidden;
 
+    z-index: -1;
 }
 
 
-/* =========================================
-   IMAGE GRID
-========================================= */
-
-.image-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 13px;
-
-}
-
-
-/* =========================================
+/* =========================================================
    UPLOAD BOX
-========================================= */
+========================================================= */
 
 .upload-box {
-
-    position: relative;
-
     display: block;
 
     width: 100%;
 
-    aspect-ratio: 1 / 1;
-
-    border:
-        1.5px dashed #b9c7bc;
-
-    border-radius: 14px;
-
-    background:
-        #fafcf9;
-
     cursor: pointer;
-
-    overflow: visible;
-
-    transition:
-        border-color 0.2s,
-        background 0.2s,
-        transform 0.2s;
-
 }
 
 
-.upload-box:hover {
-
-    border-color: #4d8a43;
-
-    background: #f3f9f0;
-
-    transform: translateY(-2px);
-
-}
-
-
-/* =========================================
+/* =========================================================
    PREVIEW
-========================================= */
+========================================================= */
 
 .preview {
-
     width: 100%;
 
-    height: 100%;
+    height: 230px;
+
+    border: 2px dashed #b7c7b7;
+
+    border-radius: 15px;
+
+    background: #f8fbf8;
 
     display: flex;
 
@@ -568,779 +246,411 @@ body {
 
     justify-content: center;
 
-    gap: 6px;
+    gap: 8px;
 
-    color: #617168;
+    overflow: hidden;
 
-    text-align: center;
+    cursor: pointer;
 
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 
-.preview .camera {
+.upload-box:hover .preview {
+    border-color: #4caf50;
 
-    font-size: 27px;
+    background: #f0f8f0;
 
+    transform: translateY(-2px);
 }
 
+
+.upload-box:active .preview {
+    transform: scale(0.99);
+}
+
+
+/* =========================================================
+   CAMERA ICON
+========================================================= */
+
+.camera {
+    font-size: 42px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   PREVIEW TEXT
+========================================================= */
 
 .preview strong {
+    font-size: 17px;
 
-    font-size: 11px;
-
-    font-weight: 600;
-
+    color: #304230;
 }
 
 
 .preview small {
+    font-size: 13px;
 
-    font-size: 9px;
-
-    color: #9ba59f;
-
+    color: #777;
 }
 
 
-/* =========================================
-   IMAGE PREVIEW
-========================================= */
+/* =========================================================
+   PREVIEW IMAGE
+========================================================= */
 
 .preview img {
-
     width: 100%;
-
     height: 100%;
-
-    object-fit: cover;
-
-    border-radius: 12px;
 
     display: block;
 
+    object-fit: cover;
 }
 
 
-/* =========================================
-   REMOVE IMAGE
-========================================= */
+/* =========================================================
+   REMOVE BUTTON
+========================================================= */
 
 .remove {
-
     position: absolute;
 
-    top: -7px;
+    top: 10px;
+    right: 10px;
 
-    right: -7px;
-
-    width: 24px;
-
-    height: 24px;
+    width: 36px;
+    height: 36px;
 
     display: none;
 
     align-items: center;
-
     justify-content: center;
+
+    border: none;
 
     border-radius: 50%;
 
-    border:
-        2px solid #ffffff;
-
-    background: #26372b;
+    background: #d32f2f;
 
     color: #ffffff;
 
-    font-size: 15px;
+    font-size: 25px;
+
+    line-height: 1;
 
     cursor: pointer;
 
-    z-index: 5;
+    z-index: 10;
 
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 
 .remove:hover {
+    background: #b71c1c;
 
-    background: #111d15;
-
+    transform: scale(1.05);
 }
 
 
-/* =========================================
+/* =========================================================
    PHOTO TIP
-========================================= */
+========================================================= */
 
 .photo-tip {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    margin-top: 16px;
-
-    padding: 11px 13px;
-
-    border-radius: 9px;
-
-    background: #f1f7ed;
-
-    color: #62705f;
-
-    font-size: 11px;
-
-    line-height: 1.5;
-
-}
-
-
-/* =========================================
-   PROBLEM TEXTAREA
-========================================= */
-
-.problem-field {
-
-    position: relative;
-
-}
-
-
-.problem-field textarea {
-
     width: 100%;
 
-    min-height: 150px;
+    margin-top: 22px;
 
-    resize: vertical;
-
-    padding: 15px;
-
-    border:
-        1px solid #d9e0db;
+    padding: 15px 18px;
 
     border-radius: 12px;
 
-    outline: none;
+    background: #f3f8f3;
 
-    color: #25382b;
+    color: #5e685e;
 
-    background: #ffffff;
+    display: flex;
 
-    font-family: inherit;
+    align-items: flex-start;
+
+    gap: 10px;
 
     font-size: 14px;
 
     line-height: 1.6;
-
-    transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
-
 }
 
 
-.problem-field textarea:focus {
-
-    border-color: #4c8a43;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(76, 138, 67, 0.10);
-
+.tip-icon {
+    flex-shrink: 0;
 }
 
 
-.problem-field textarea::placeholder {
-
-    color: #a1aaa5;
-
-}
-
-
-/* =========================================
-   CHARACTER COUNT
-========================================= */
-
-.character-info {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    margin-top: 7px;
-
-    color: #939c96;
-
-    font-size: 10px;
-
-}
-
-
-/* =========================================
-   ERROR
-========================================= */
-
-.error {
-
-    color: #b42318;
-
-    font-size: 11px;
-
-    margin-top: 3px;
-
-}
-
-
-/* =========================================
+/* =========================================================
    SUBMIT SECTION
-========================================= */
+========================================================= */
 
 .submit-section {
+    width: 100%;
 
-    display: flex;
+    margin-top: 25px;
 
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 5px 4px 15px;
-
+    text-align: center;
 }
 
 
 .privacy {
+    margin-bottom: 15px;
 
-    color:
-        rgba(255, 255, 255, 0.75);
+    color: #6b736b;
 
-    font-size: 11px;
-
+    font-size: 14px;
 }
 
 
-/* =========================================
+/* =========================================================
    ANALYZE BUTTON
-========================================= */
+========================================================= */
 
 .analyze-button {
+    width: 100%;
 
-    height: 50px;
+    min-height: 58px;
 
-    min-width: 190px;
-
-    padding:
-        0 18px;
+    padding: 15px 22px;
 
     border: none;
 
-    border-radius: 11px;
+    border-radius: 12px;
 
-    background: #2e7135;
+    background: #2e7d32;
 
     color: #ffffff;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    font-family: inherit;
-
-    font-size: 13px;
+    font-size: 18px;
 
     font-weight: 600;
 
     cursor: pointer;
 
-    box-shadow:
-        0 7px 18px
-        rgba(26, 75, 32, 0.3);
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
 
     transition:
-        background 0.2s,
-        transform 0.2s;
-
+        background 0.2s ease,
+        transform 0.2s ease;
 }
 
 
 .analyze-button:hover {
-
-    background: #245d2b;
+    background: #256b29;
 
     transform: translateY(-1px);
-
 }
 
 
-.arrow {
-
-    font-size: 17px;
-
+.analyze-button:active {
+    transform: scale(0.99);
 }
 
 
-/* =========================================
-   MOBILE NAV
-========================================= */
-
-.mobile-nav {
-
-    display: none;
-
+.analyze-button .arrow {
+    font-size: 24px;
 }
 
 
-/* =========================================
+/* =========================================================
+   BUTTON DISABLED
+========================================================= */
+
+.analyze-button:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
    TABLET
-========================================= */
+========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
 
-    .navbar {
-
-        padding: 0 25px;
-
+    .page {
+        padding: 30px 16px;
     }
 
 
-    .main {
+    .page-heading h1 {
+        font-size: 28px;
+    }
 
-        max-width: 720px;
 
-        padding:
-            55px 18px 60px;
-
+    .card {
+        padding: 22px;
     }
 
 
     .image-grid {
+        gap: 15px;
+    }
 
-        grid-template-columns:
-            repeat(2, 1fr);
 
+    .preview {
+        height: 200px;
     }
 
 }
 
 
-/* =========================================
+/* =========================================================
    MOBILE
-========================================= */
+========================================================= */
 
 @media (max-width: 600px) {
 
-    body {
-
-        padding-bottom: 68px;
-
-    }
-
-
     .page {
-
-        background-attachment: scroll;
-
-        background-position: center;
-
+        padding: 20px 12px;
     }
 
-
-    /* Navbar */
-
-    .navbar {
-
-        height: 60px;
-
-        padding: 0 15px;
-
-    }
-
-
-    .desktop-nav {
-
-        display: none;
-
-    }
-
-
-    .brand-name {
-
-        font-size: 16px;
-
-    }
-
-
-    .profile span {
-
-        display: none;
-
-    }
-
-
-    .profile-avatar {
-
-        width: 33px;
-
-        height: 33px;
-
-    }
-
-
-    /* Main */
-
-    .main {
-
-        padding:
-            35px 12px 35px;
-
-    }
-
-
-    /* Heading */
 
     .page-heading {
-
-        margin-bottom: 25px;
-
+        margin-bottom: 22px;
     }
 
 
     .heading-icon {
-
-        font-size: 29px;
-
+        font-size: 40px;
     }
 
 
     .page-heading h1 {
-
-        font-size: 26px;
-
+        font-size: 24px;
     }
 
 
     .page-heading p {
-
-        font-size: 12px;
-
-        max-width: 340px;
-
+        font-size: 14px;
     }
 
 
-    /* Cards */
-
     .card {
+        padding: 18px;
 
-        padding: 18px 14px;
-
-        border-radius: 16px;
-
+        border-radius: 15px;
     }
 
 
     .card-title {
+        gap: 10px;
 
         margin-bottom: 20px;
-
     }
 
 
     .title-icon {
+        width: 42px;
+        height: 42px;
 
-        width: 40px;
-
-        height: 40px;
-
-        font-size: 19px;
-
+        font-size: 21px;
     }
 
 
     .card-title h2 {
-
-        font-size: 16px;
-
+        font-size: 19px;
     }
 
 
     .card-title p {
-
-        font-size: 10px;
-
+        font-size: 13px;
     }
 
 
-    /* Details */
-
-    .details-grid {
-
+    .image-grid {
         grid-template-columns: 1fr;
 
-        gap: 14px;
-
+        gap: 15px;
     }
 
 
-    .location-field {
-
-        grid-column: auto;
-
+    .preview {
+        height: 220px;
     }
 
 
-    /* Images */
-
-    .image-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 10px;
-
-    }
-
-
-    .upload-box {
-
-        border-radius: 12px;
-
-    }
-
-
-    .preview .camera {
-
-        font-size: 23px;
-
-    }
-
-
-    /* Problem */
-
-    .problem-field textarea {
-
-        min-height: 130px;
-
-        font-size: 13px;
-
-    }
-
-
-    /* Submit */
-
-    .submit-section {
-
-        flex-direction: column-reverse;
-
-        align-items: stretch;
-
-        gap: 12px;
-
-    }
-
-
-    .analyze-button {
-
-        width: 100%;
-
-        height: 52px;
-
-    }
-
-
-    .privacy {
-
-        text-align: center;
-
-        font-size: 9px;
-
-    }
-
-
-    /* Mobile Bottom Nav */
-
-    .mobile-nav {
-
-        position: fixed;
-
-        left: 0;
-
-        right: 0;
-
-        bottom: 0;
-
-        height: 68px;
-
-        display: grid;
-
-        grid-template-columns:
-            repeat(4, 1fr);
-
-        background:
-            rgba(15, 46, 26, 0.96);
-
-        border-top:
-            1px solid
-            rgba(255, 255, 255, 0.12);
-
-        backdrop-filter: blur(15px);
-
-        z-index: 1000;
-
-    }
-
-
-    .mobile-nav a {
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        justify-content: center;
-
-        gap: 3px;
-
-        text-decoration: none;
-
-        color:
-            rgba(255, 255, 255, 0.55);
-
-        font-size: 9px;
-
-    }
-
-
-    .mobile-nav a span {
-
-        font-size: 18px;
-
-    }
-
-
-    .mobile-nav a.active {
-
-        color: #ffffff;
-
-    }
-
-}
-
-
-/* =========================================
-   SMALL MOBILE
-========================================= */
-
-@media (max-width: 380px) {
-
-    .main {
-
-        padding-left: 9px;
-
-        padding-right: 9px;
-
-    }
-
-
-    .card {
-
-        padding: 16px 12px;
-
-    }
-
-
-    .page-heading h1 {
-
-        font-size: 23px;
-
-    }
-
-
-    .image-grid {
-
-        gap: 8px;
-
+    .preview strong {
+        font-size: 16px;
     }
 
 
     .photo-tip {
+        font-size: 13px;
 
-        font-size: 10px;
+        padding: 12px;
+    }
 
+
+    .analyze-button {
+        font-size: 16px;
+
+        min-height: 54px;
     }
 
 }
 
 
-/* =========================================
-   LARGE DESKTOP
-========================================= */
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
-@media (min-width: 1400px) {
+@media (max-width: 380px) {
 
-    .navbar {
-
-        padding-left: 70px;
-
-        padding-right: 70px;
-
-    }
-
-
-    .main {
-
-        max-width: 950px;
-
-        padding-top: 80px;
-
-    }
-
-
-    .page-heading h1 {
-
-        font-size: 40px;
-
+    .page {
+        padding: 15px 10px;
     }
 
 
     .card {
+        padding: 14px;
+    }
 
-        padding: 30px;
 
+    .page-heading h1 {
+        font-size: 22px;
+    }
+
+
+    .preview {
+        height: 190px;
+    }
+
+
+    .camera {
+        font-size: 36px;
+    }
+
+
+    .remove {
+        width: 32px;
+        height: 32px;
+
+        font-size: 22px;
     }
 
 }
 
-
-/* =========================================
-   ACCESSIBILITY
-========================================= */
-
-button,
-input,
-textarea {
-
-    -webkit-tap-highlight-color: transparent;
-
-}
-
-
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-
-    outline:
-        2px solid #4c8a43;
-
-    outline-offset: 2px;
-
-}
