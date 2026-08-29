@@ -615,7 +615,7 @@ The final answer must be practical enough for a farmer to understand, but scient
                         f"{getattr(image_field, 'name', 'unknown')} "
                         f"{image_error}"
                     )
-            response = client.models.generate_content_stream(model="gemini-3.6-flash",contents=contents,config=types.GenerateContentConfig(automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True)))
+            response = client.models.generate_content_stream(model="gemini-3.6-flash",contents=contents ,config=types.GenerateContentConfig(automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True)))
             for chunk in response:
                 text = getattr(chunk,"text","")
                 if not text:
@@ -634,6 +634,7 @@ The final answer must be practical enough for a farmer to understand, but scient
             # COMPLETE
             yield (json.dumps({"type": "complete"})+ "\n")
         except Exception as error:
+            print("exception ",error)
             yield (json.dumps({"type": "error","message":"AI analysis failed. Please try again."})+ "\n")
 
     # STREAMING RESPONSE
