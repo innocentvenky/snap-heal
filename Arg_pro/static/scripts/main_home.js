@@ -9,7 +9,7 @@ console.log("MAIN_HOME.JS LOADED");
 const prompts = {
 
     "en-IN": {
-        welcome: "Welcome to Snap Heal, your digital crop doctor.",
+        welcome: "Welcome to Snap Heal, your digital crop doctor. Farmers are the backbone of our nation, and we are here to support you.",
         cropName: "What is the name of your crop?",
         askAge: "What is the current age of your crop?",
         askLoc: "Which village or district is your farm located in?",
@@ -23,7 +23,7 @@ const prompts = {
     },
 
     "te-IN": {
-        welcome: "స్నాప్ హీల్ డిజిటల్ పంట వైద్యునికి స్వాగతం.",
+        welcome: "స్నాప్ హీల్ డిజిటల్ పంట వైద్యునికి స్వాగతం. రైతే రాజు, మీ కష్టానికి తగిన ప్రతిఫలం అందించడమే మా లక్ష్యం.",
         cropName: "మీ పంట పేరు ఏమిటి?",
         askAge: "మీ పంట వయస్సు ఎన్ని రోజులు లేదా వారాలు?",
         askLoc: "మీ పొలం ఏ గ్రామం లేదా జిల్లాలో ఉంది?",
@@ -37,7 +37,7 @@ const prompts = {
     },
 
     "hi-IN": {
-        welcome: "स्नैप हील डिजिटल फसल डॉक्टर में आपका स्वागत है।",
+        welcome:"स्नैप हील डिजिटल फसल डॉक्टर में आपका स्वागत है। किसान हमारे देश की शान हैं, और हम आपकी हर कदम पर मदद करेंगे।",
         cropName: "आपकी फसल का नाम क्या है?",
         askAge: "आपकी फसल कितने दिन या हफ्तों की है?",
         askLoc: "आपका खेत किस गांव या जिले में स्थित है?",
@@ -57,9 +57,7 @@ const prompts = {
 // SPEECH API
 // ============================================================
 
-const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition ;
 
 
 let recognition = null;

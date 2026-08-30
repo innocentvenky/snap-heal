@@ -52,12 +52,7 @@
          FORM
     ====================================================== -->
 
-    <form
-        method="POST"
-        enctype="multipart/form-data"
-        class="crop-form"
-        id="cropForm"
-    >
+    <form method="POST"  class="crop-form" id="cropForm">
 
         {% csrf_token %}
 
@@ -74,7 +69,7 @@
                 భాషను ఎంచుకోండి:
             </label>
 
-            <select id="langSelect">
+            <select id="langSelect" name="language">
 
                 <option value="en-IN">
                     English (India)

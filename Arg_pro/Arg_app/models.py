@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Crop_details(models.Model):
     crop_name=models.CharField(max_length=30)
-    crop_age=models.PositiveIntegerField()
+    crop_age=models.CharField(max_length=50)
     location=models.CharField(max_length=500)
     disease_img_1=models.ImageField(upload_to="crop_images/",blank=True,null=True)
     disease_img_2=models.ImageField(upload_to="crop_images/",blank=True,null=True)

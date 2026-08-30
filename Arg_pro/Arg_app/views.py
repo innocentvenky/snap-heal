@@ -16,17 +16,19 @@ import json
 
 
 def home(request):
+    print(request.method =='POST')
     if request.method == "POST":
-
+        lang=request.POST.get("language")
+        request.session["lang"]=lang
         form = Crop_details_from(request.POST,request.FILES)
         if form.is_valid():
             Crop_details.objects.all().delete()
             crop=form.save()
             request.session["crop_data"] = crop.id
+            print("testing")
             return redirect("crop_images")
     else:
         form = Crop_details_from()
-    
     return render(request,"main_home.html",{"form": form})
 def crop_images(request):
     crop_id=request.session.get("crop_data")
@@ -75,8 +77,8 @@ def generate_crop_advice(request):
 
     # GEMINI PROMPT
 
-    prompt = f"""
-
+    prompt = f""" 
+    generate the out in {request.session.get("lang")} 
 You are an expert Agricultural Crop-Care AI specializing in plant disease diagnosis, pest identification, crop nutrition, irrigation, and Integrated Pest Management (IPM).
 
 Your job is to analyze the farmer's crop problem using ALL available evidence:
@@ -100,7 +102,7 @@ Crop Name:
 {crop.crop_name}
 
 Crop Age:
-{crop.crop_age} days
+{crop.crop_age} 
 
     Farm Location:
     {crop.location} Current Weather
