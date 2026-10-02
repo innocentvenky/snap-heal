@@ -1,0 +1,656 @@
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+    width: 100%;
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f5f8f5;
+    color: #263326;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 40px 20px;
+}
+
+
+.main {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
+.page-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.heading-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+
+.page-heading h1 {
+    font-size: 32px;
+    font-weight: 700;
+
+    margin-bottom: 10px;
+
+    color: #1f3b21;
+}
+
+
+.page-heading p {
+    font-size: 16px;
+    line-height: 1.6;
+
+    color: #667066;
+
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+    width: 100%;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.card-title {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+
+.title-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e9f5e9;
+
+    font-size: 25px;
+
+    flex-shrink: 0;
+}
+
+
+.card-title h2 {
+    font-size: 22px;
+
+    margin-bottom: 5px;
+
+    color: #253b27;
+}
+
+
+.card-title p {
+    font-size: 14px;
+
+    color: #747c74;
+}
+
+
+/* =========================================================
+   IMAGE GRID
+========================================================= */
+
+.image-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   IMAGE UPLOAD
+========================================================= */
+
+.image-upload {
+    position: relative;
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   REAL FILE INPUT
+========================================================= */
+
+/*
+   IMPORTANT:
+
+   Do NOT use:
+   pointer-events: none;
+
+   We hide the input visually but keep it
+   functional.
+*/
+
+.image-upload input[type="file"] {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+
+    overflow: hidden;
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   UPLOAD BOX
+========================================================= */
+
+.upload-box {
+    display: block;
+
+    width: 100%;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+.preview {
+    width: 100%;
+
+    height: 230px;
+
+    border: 2px dashed #b7c7b7;
+
+    border-radius: 15px;
+
+    background: #f8fbf8;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.upload-box:hover .preview {
+    border-color: #4caf50;
+
+    background: #f0f8f0;
+
+    transform: translateY(-2px);
+}
+
+
+.upload-box:active .preview {
+    transform: scale(0.99);
+}
+
+
+/* =========================================================
+   CAMERA ICON
+========================================================= */
+
+.camera {
+    font-size: 42px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   PREVIEW TEXT
+========================================================= */
+
+.preview strong {
+    font-size: 17px;
+
+    color: #304230;
+}
+
+
+.preview small {
+    font-size: 13px;
+
+    color: #777;
+}
+
+
+/* =========================================================
+   PREVIEW IMAGE
+========================================================= */
+
+.preview img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   REMOVE BUTTON
+========================================================= */
+
+.remove {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 36px;
+    height: 36px;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #d32f2f;
+
+    color: #ffffff;
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.remove:hover {
+    background: #b71c1c;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   PHOTO TIP
+========================================================= */
+
+.photo-tip {
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 15px 18px;
+
+    border-radius: 12px;
+
+    background: #f3f8f3;
+
+    color: #5e685e;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+.tip-icon {
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SUBMIT SECTION
+========================================================= */
+
+.submit-section {
+    width: 100%;
+
+    margin-top: 25px;
+
+    text-align: center;
+}
+
+
+.privacy {
+    margin-bottom: 15px;
+
+    color: #6b736b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ANALYZE BUTTON
+========================================================= */
+
+.analyze-button {
+    width: 100%;
+
+    min-height: 58px;
+
+    padding: 15px 22px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #2e7d32;
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.analyze-button:hover {
+    background: #256b29;
+
+    transform: translateY(-1px);
+}
+
+
+.analyze-button:active {
+    transform: scale(0.99);
+}
+
+
+.analyze-button .arrow {
+    font-size: 24px;
+}
+
+
+/* =========================================================
+   BUTTON DISABLED
+========================================================= */
+
+.analyze-button:disabled {
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .page {
+        padding: 30px 16px;
+    }
+
+
+    .page-heading h1 {
+        font-size: 28px;
+    }
+
+
+    .card {
+        padding: 22px;
+    }
+
+
+    .image-grid {
+        gap: 15px;
+    }
+
+
+    .preview {
+        height: 200px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .page {
+        padding: 20px 12px;
+    }
+
+
+    .page-heading {
+        margin-bottom: 22px;
+    }
+
+
+    .heading-icon {
+        font-size: 40px;
+    }
+
+
+    .page-heading h1 {
+        font-size: 24px;
+    }
+
+
+    .page-heading p {
+        font-size: 14px;
+    }
+
+
+    .card {
+        padding: 18px;
+
+        border-radius: 15px;
+    }
+
+
+    .card-title {
+        gap: 10px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .title-icon {
+        width: 42px;
+        height: 42px;
+
+        font-size: 21px;
+    }
+
+
+    .card-title h2 {
+        font-size: 19px;
+    }
+
+
+    .card-title p {
+        font-size: 13px;
+    }
+
+
+    .image-grid {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+
+    .preview {
+        height: 220px;
+    }
+
+
+    .preview strong {
+        font-size: 16px;
+    }
+
+
+    .photo-tip {
+        font-size: 13px;
+
+        padding: 12px;
+    }
+
+
+    .analyze-button {
+        font-size: 16px;
+
+        min-height: 54px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .page {
+        padding: 15px 10px;
+    }
+
+
+    .card {
+        padding: 14px;
+    }
+
+
+    .page-heading h1 {
+        font-size: 22px;
+    }
+
+
+    .preview {
+        height: 190px;
+    }
+
+
+    .camera {
+        font-size: 36px;
+    }
+
+
+    .remove {
+        width: 32px;
+        height: 32px;
+
+        font-size: 22px;
+    }
+
+}
+

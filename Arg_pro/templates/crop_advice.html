@@ -1,0 +1,704 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Snap-Heal | Smart Crop Suggestion
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/crop_suggestion.css' %}"
+    >
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <!-- =====================================================
+         BRAND
+    ====================================================== -->
+
+    <header class="brand-header">
+
+        <div class="brand-logo">
+            🌱 Snap-Heal
+        </div>
+
+        <p class="brand-tagline">
+            Smart Crop Recommendation •
+            మీ స్మార్ట్ పంట సిఫార్సు
+        </p>
+
+        <p class="welcome-text">
+            Tell us about your farm and let Snap-Heal
+            help you choose a suitable crop.
+        </p>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN CARD
+    ====================================================== -->
+
+    <main class="main-card">
+
+
+        <!-- =================================================
+             LANGUAGE
+        ================================================== -->
+
+        <div class="language-box">
+
+            <div class="language-icon">
+                🗣️
+            </div>
+
+            <div class="language-content">
+
+                <label for="langSelect">
+                    Voice Language
+                    <span>/ వాయిస్ భాష</span>
+                </label>
+
+                <select id="langSelect">
+
+                    <option value="en-IN">
+                        English (India)
+                    </option>
+
+                    <option value="te-IN">
+                        Telugu (తెలుగు)
+                    </option>
+
+                    <option value="hi-IN">
+                        Hindi (हिंदी)
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             VOICE STATUS
+        ================================================== -->
+
+        <div
+            id="statusBox"
+            class="status-box"
+        >
+            🎙️ Select a language and tap any microphone.
+            Snap-Heal will ask the question and listen to you.
+        </div>
+
+
+        <!-- =================================================
+             FORM
+        ================================================== -->
+
+        <form
+            method="POST"
+            class="crop-form"
+            id="cropForm"
+        >
+
+            {% csrf_token %}
+
+            <input
+                type="hidden"
+                name="language"
+                id="languageInput"
+                value="en-IN"
+            >
+
+
+            <!-- =================================================
+                 SOIL HEALTH
+            ================================================== -->
+
+            <section class="form-section">
+
+                <div class="section-header">
+
+                    <div class="section-icon">
+                        🧪
+                    </div>
+
+                    <div>
+                        <h2>Soil Health</h2>
+
+                        <p>
+                            నేల ఆరోగ్యం
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="fields-grid">
+
+
+                    <!-- SOIL TYPE -->
+
+                    <div class="form-group">
+
+                        <label for="soilType">
+
+                            Soil Type
+
+                            <span>
+                                నేల రకం
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="soilType"
+                                name="soil_type"
+                                placeholder="Example: Red Soil"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="soilType"
+                                aria-label="Speak Soil Type"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SOIL PH -->
+
+                    <div class="form-group">
+
+                        <label for="soilPh">
+
+                            Soil pH
+
+                            <span>
+                                నేల pH విలువ
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="soilPh"
+                                name="soil_ph"
+                                placeholder="Example: 6.5"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="soilPh"
+                                aria-label="Speak Soil pH"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ORGANIC CARBON -->
+
+                    <div class="form-group">
+
+                        <label for="organicCarbon">
+
+                            Organic Carbon (%)
+
+                            <span>
+                                సేంద్రీయ కార్బన్
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="organicCarbon"
+                                name="organic_carbon"
+                                placeholder="Example: 0.75"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="organicCarbon"
+                                aria-label="Speak Organic Carbon"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group">
+
+                        <label for="location">
+
+                            Farm Location
+
+                            <span>
+                                వ్యవసాయ ప్రాంతం
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="location"
+                                name="location"
+                                placeholder="Village / Mandal / District"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="location"
+                                aria-label="Speak Farm Location"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PINCODE -->
+
+                    <div class="form-group">
+
+                        <label for="pincode">
+
+                            Pincode
+
+                            <span>
+                                పిన్ కోడ్
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                name="pincode"
+                                maxlength="6"
+                                placeholder="Example: 517325"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="pincode"
+                                aria-label="Speak Pincode"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FARM AREA -->
+
+                    <div class="form-group">
+
+                        <label for="farmArea">
+
+                            Farm Area
+
+                            <span>
+                                వ్యవసాయ భూమి విస్తీర్ణం
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="farmArea"
+                                name="Fram_area"
+                                placeholder="Example: 2 acres"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="farmArea"
+                                aria-label="Speak Farm Area"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 WATER & FARM HISTORY
+            ================================================== -->
+
+            <section class="form-section">
+
+                <div class="section-header">
+
+                    <div class="section-icon">
+                        💧
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Water & Farm History
+                        </h2>
+
+                        <p>
+                            నీటి వనరులు & గత పంట వివరాలు
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fields-grid">
+
+
+                    <!-- IRRIGATION -->
+
+                    <div class="form-group">
+
+                        <label for="irrigation">
+
+                            Irrigation Type
+
+                            <span>
+                                నీటిపారుదల రకం
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="irrigation"
+                                name="irragation_type"
+                                placeholder="Example: Drip Irrigation"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="irrigation"
+                                aria-label="Speak Irrigation Type"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- WATER SOURCE -->
+
+                    <div class="form-group">
+
+                        <label for="waterSource">
+
+                            Water Source
+
+                            <span>
+                                నీటి వనరు
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="waterSource"
+                                name="water_scource"
+                                placeholder="Example: Borewell"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="waterSource"
+                                aria-label="Speak Water Source"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PREVIOUS CROP -->
+
+                    <div class="form-group">
+
+                        <label for="previousCrop">
+
+                            Previous Crop
+
+                            <span>
+                                గత పంట
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="previousCrop"
+                                name="pervious_crop"
+                                placeholder="Example: Paddy"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="previousCrop"
+                                aria-label="Speak Previous Crop"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PLANTING DATE -->
+
+                    <div class="form-group">
+
+                        <label for="plantingDate">
+
+                            Planting Date
+
+                            <span>
+                                నాటే తేదీ
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="plantingDate"
+                                name="planting_date"
+                                placeholder="Example: July/2026"
+                                autocomplete="off"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="plantingDate"
+                                aria-label="Speak Planting Date"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CROP PLAN
+            ================================================== -->
+
+            <section class="form-section">
+
+                <div class="section-header">
+
+                    <div class="section-icon">
+                        🌾
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Crop Plan
+                        </h2>
+
+                        <p>
+                            పంట సాగు ప్రణాళిక
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="single-field">
+
+                    <div class="form-group">
+
+                        <label for="desiredCrop">
+
+                            Desired Crop
+
+                            <span>
+                                కావలసిన పంట
+                            </span>
+
+                        </label>
+
+                        <div class="input-container">
+
+                            <input
+                                type="text"
+                                id="desiredCrop"
+                                name="Desired_Crop"
+                                placeholder="Example: Groundnut"
+                                autocomplete="off"
+                            >
+
+                            <button
+                                type="button"
+                                class="mic-btn"
+                                data-field="desiredCrop"
+                                aria-label="Speak Desired Crop"
+                            >
+                                🎙️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SUBMIT
+            ================================================== -->
+            
+<div class="submit-area">
+
+    <button
+        type="button"
+        class="submit-btn"
+        id="saveBtn"
+    >
+        🌱 Get Smart Crop Recommendation
+    </button>
+
+    <p class="submit-help">
+        🎙️ Tap a microphone → listen to the question
+        → answer naturally.
+    </p>
+
+</div>
+
+
+        </form>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <strong>
+            🌱 Snap-Heal
+        </strong>
+
+        <span>
+            AI-Powered Agriculture Advisory Platform
+        </span>
+
+    </footer>
+
+</div>
+
+
+<script
+    src="{% static 'scripts/crop_suggestion.js' %}"
+    defer
+></script>
+
+</body>
+
+</html>

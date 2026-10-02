@@ -1,0 +1,209 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Snap-Heal | Digital Crop Doctor</title>
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+ 
+</head>
+
+
+<body>
+
+
+<div class="page-container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="brand-header">
+
+        <div class="brand-logo">
+            🌱 Snap-Heal
+        </div>
+
+
+        <p class="brand-tagline">
+
+            Your Digital Crop Doctor •
+
+            మీ డిజిటల్ పంట వైద్యుడు
+
+        </p>
+
+
+        <p class="welcome-text">
+
+            Smart farming starts with the right decision.
+
+        </p>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN OPTIONS
+    ====================================================== -->
+
+    <main class="action-container">
+
+
+        <!-- =================================================
+             CROP SUGGESTION
+        ================================================== -->
+
+        <section class="action-card crop-suggestion-card">
+
+
+            <div class="action-icon">
+                🌾
+            </div>
+
+
+            <h2>
+                Crop Suggestion
+            </h2>
+
+
+            <p class="telugu-title">
+
+                సరైన పంటను ఎంచుకోండి
+
+            </p>
+
+
+            <p class="action-description">
+
+                Find which crop is suitable for your
+                soil and farm conditions.
+
+            </p>
+
+
+            <div class="feature-list">
+
+                <span>🌱 Soil Type</span>
+
+                <span>🧪 Soil pH</span>
+
+                <span>🌿 Organic Carbon</span>
+
+                <span>📍 Location</span>
+
+                <span>🌡️ Weather</span>
+
+                <span>💧 Rainfall</span>
+
+            </div>
+
+
+            <a href="{% url 'crop_advice' %}"
+               class="action-button suggestion-button">
+
+                🌾 Suggest a Crop
+
+            </a>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CROP DOCTOR
+        ================================================== -->
+
+        <section class="action-card crop-doctor-card">
+
+
+            <div class="action-icon">
+                🩺
+            </div>
+
+
+            <h2>
+                Crop Doctor
+            </h2>
+
+
+            <p class="telugu-title">
+
+                మీ పంటకు వైద్య సహాయం
+
+            </p>
+
+
+            <p class="action-description">
+
+                Diagnose crop problems and get
+                AI-powered treatment guidance.
+
+            </p>
+
+
+            <div class="feature-list">
+
+                <span>📸 Crop Image</span>
+
+                <span>🦠 Disease Detection</span>
+
+                <span>💊 Treatment</span>
+
+                <span>💧 Irrigation</span>
+
+                <span>📅 Care Schedule</span>
+
+            </div>
+
+
+            <a href="{% url 'crop_doctor' %}"
+               class="action-button doctor-button">
+
+                🩺 Open Crop Doctor
+
+            </a>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <p>
+            🌱 Snap-Heal
+        </p>
+
+        <span>
+            AI-Powered Agriculture Advisory Platform
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

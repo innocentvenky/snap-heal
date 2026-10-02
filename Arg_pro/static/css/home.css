@@ -1,0 +1,703 @@
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0f7f4 0%,
+                    #e8f5e9 50%,
+                    #f7fbf8 100%
+                );
+
+            color: #263238;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           MAIN CONTAINER
+        ====================================================== */
+
+        .page-container {
+
+            width: 100%;
+
+            max-width: 1100px;
+            min-height: 100vh;
+
+            margin: 0 auto;
+
+            padding:
+                clamp(25px, 5vw, 60px)
+                clamp(15px, 4vw, 30px);
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .brand-header {
+
+            text-align: center;
+
+            margin-bottom:
+                clamp(30px, 5vw, 50px);
+        }
+
+
+        .brand-logo {
+
+            font-size:
+                clamp(30px, 5vw, 44px);
+
+            font-weight: 800;
+
+            color: #2e7d32;
+
+            letter-spacing: 1px;
+
+            line-height: 1.2;
+        }
+
+
+        .brand-tagline {
+
+            margin-top: 10px;
+
+            font-size:
+                clamp(13px, 2vw, 17px);
+
+            color: #607d65;
+
+            font-style: italic;
+
+            line-height: 1.5;
+        }
+
+
+        .welcome-text {
+
+            margin-top: 18px;
+
+            font-size:
+                clamp(15px, 2.5vw, 19px);
+
+            font-weight: 600;
+
+            color: #37474f;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           ACTION CONTAINER
+        ====================================================== */
+
+        .action-container {
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap:
+                clamp(18px, 3vw, 30px);
+
+            margin: 0 auto;
+        }
+
+
+        /* =====================================================
+           ACTION CARD
+        ====================================================== */
+
+        .action-card {
+
+            width: 100%;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border-radius:
+                clamp(16px, 3vw, 24px);
+
+            padding:
+                clamp(25px, 4vw, 38px)
+                clamp(18px, 4vw, 32px);
+
+            text-align: center;
+
+            border: 1px solid #e1eee4;
+
+            box-shadow:
+                0 12px 35px
+                rgba(46, 125, 50, 0.12);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        .action-card:hover {
+
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 18px 45px
+                rgba(46, 125, 50, 0.18);
+        }
+
+
+        /* =====================================================
+           ICON
+        ====================================================== */
+
+        .action-icon {
+
+            width:
+                clamp(65px, 10vw, 90px);
+
+            height:
+                clamp(65px, 10vw, 90px);
+
+            margin:
+                0 auto
+                clamp(15px, 3vw, 22px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size:
+                clamp(32px, 6vw, 45px);
+
+            background: #e8f5e9;
+        }
+
+
+        /* =====================================================
+           CARD TITLE
+        ====================================================== */
+
+        .action-card h2 {
+
+            font-size:
+                clamp(21px, 3vw, 28px);
+
+            color: #2e7d32;
+
+            line-height: 1.3;
+        }
+
+
+        .telugu-title {
+
+            margin:
+                7px 0 15px;
+
+            font-size:
+                clamp(13px, 2vw, 16px);
+
+            color: #689f38;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+        }
+
+
+        .action-description {
+
+            max-width: 420px;
+
+            margin:
+                0 auto 22px;
+
+            color: #607d65;
+
+            font-size:
+                clamp(13px, 2vw, 15px);
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           FEATURE TAGS
+        ====================================================== */
+
+        .feature-list {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .feature-list span {
+
+            background: #f1f8f3;
+
+            color: #426548;
+
+            padding:
+                7px 10px;
+
+            border-radius: 20px;
+
+            font-size:
+                clamp(10px, 1.5vw, 12px);
+
+            border: 1px solid #dcebdd;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           BUTTON
+        ====================================================== */
+
+        .action-button {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 100%;
+
+            min-height: 52px;
+
+            padding:
+                13px 18px;
+
+            border-radius: 11px;
+
+            text-decoration: none;
+
+            color: white;
+
+            font-size:
+                clamp(14px, 2vw, 17px);
+
+            font-weight: 700;
+
+            line-height: 1.3;
+
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .action-button:hover {
+
+            transform: translateY(-2px);
+        }
+
+
+        .action-button:active {
+
+            transform: scale(0.98);
+        }
+
+
+        /* =====================================================
+           CROP SUGGESTION BUTTON
+        ====================================================== */
+
+        .suggestion-button {
+
+            background: #2e7d32;
+
+            box-shadow:
+                0 5px 15px
+                rgba(46, 125, 50, 0.2);
+        }
+
+
+        .suggestion-button:hover {
+
+            background: #1b5e20;
+
+            box-shadow:
+                0 8px 20px
+                rgba(46, 125, 50, 0.3);
+        }
+
+
+        /* =====================================================
+           CROP DOCTOR BUTTON
+        ====================================================== */
+
+        .doctor-button {
+
+            background: #1976d2;
+
+            box-shadow:
+                0 5px 15px
+                rgba(25, 118, 210, 0.2);
+        }
+
+
+        .doctor-button:hover {
+
+            background: #0d47a1;
+
+            box-shadow:
+                0 8px 20px
+                rgba(25, 118, 210, 0.3);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        .footer {
+
+            text-align: center;
+
+            margin-top:
+                clamp(30px, 5vw, 50px);
+
+            padding-top: 10px;
+
+            color: #78909c;
+
+            font-size:
+                clamp(11px, 1.8vw, 14px);
+
+            line-height: 1.6;
+        }
+
+
+        .footer p {
+
+            margin-bottom: 5px;
+
+            font-size:
+                clamp(14px, 2vw, 16px);
+
+            font-weight: 700;
+
+            color: #2e7d32;
+        }
+
+
+        /* =====================================================
+           LARGE DESKTOP
+        ====================================================== */
+
+        @media (min-width: 1200px) {
+
+            .page-container {
+
+                max-width: 1150px;
+
+                padding-top: 65px;
+            }
+
+
+            .action-container {
+
+                gap: 35px;
+            }
+
+
+            .action-card {
+
+                padding: 42px 35px;
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 850px) {
+
+            .page-container {
+
+                max-width: 750px;
+            }
+
+
+            .action-container {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                gap: 18px;
+            }
+
+
+            .action-card {
+
+                padding: 25px 18px;
+            }
+
+
+            .feature-list {
+
+                gap: 6px;
+            }
+
+
+            .feature-list span {
+
+                padding: 6px 8px;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 650px) {
+
+            body {
+
+                padding: 0;
+
+            }
+
+
+            .page-container {
+
+                padding:
+                    25px
+                    15px
+                    30px;
+            }
+
+
+            .brand-header {
+
+                margin-bottom: 30px;
+            }
+
+
+            .brand-logo {
+
+                font-size: 31px;
+            }
+
+
+            .brand-tagline {
+
+                font-size: 13px;
+
+                max-width: 330px;
+
+                margin-left: auto;
+
+                margin-right: auto;
+            }
+
+
+            .welcome-text {
+
+                font-size: 15px;
+
+                margin-top: 15px;
+            }
+
+
+            .action-container {
+
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+
+            .action-card {
+
+                padding:
+                    28px
+                    20px;
+            }
+
+
+            .action-icon {
+
+                width: 72px;
+
+                height: 72px;
+
+                font-size: 36px;
+            }
+
+
+            .action-card h2 {
+
+                font-size: 23px;
+            }
+
+
+            .action-description {
+
+                font-size: 14px;
+
+                line-height: 1.6;
+            }
+
+
+            .feature-list {
+
+                margin-bottom: 22px;
+            }
+
+
+            .action-button {
+
+                min-height: 50px;
+
+                font-size: 15px;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 380px) {
+
+            .page-container {
+
+                padding:
+                    20px
+                    10px
+                    25px;
+            }
+
+
+            .brand-logo {
+
+                font-size: 27px;
+            }
+
+
+            .brand-tagline {
+
+                font-size: 12px;
+            }
+
+
+            .welcome-text {
+
+                font-size: 14px;
+            }
+
+
+            .action-card {
+
+                padding:
+                    25px
+                    16px;
+
+                border-radius: 17px;
+            }
+
+
+            .action-card h2 {
+
+                font-size: 21px;
+            }
+
+
+            .telugu-title {
+
+                font-size: 13px;
+            }
+
+
+            .feature-list span {
+
+                font-size: 10px;
+
+                padding:
+                    6px 8px;
+            }
+
+
+            .action-button {
+
+                font-size: 14px;
+
+                padding:
+                    12px 10px;
+            }
+        }
+
+
+        /* =====================================================
+           TOUCH DEVICES
+        ====================================================== */
+
+        @media (hover: none) {
+
+            .action-card:hover {
+
+                transform: none;
+
+                box-shadow:
+                    0 12px 35px
+                    rgba(46, 125, 50, 0.12);
+            }
+
+
+            .action-button:hover {
+
+                transform: none;
+            }
+        }
+
+

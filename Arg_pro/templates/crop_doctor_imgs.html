@@ -1,0 +1,368 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Crop Photos | Snap-Heal</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/crop_doctor_img.css' %}?v=2"
+    >
+</head>
+
+<body>
+
+<div class="page">
+
+    <main class="main">
+
+        <!-- ================= HEADER ================= -->
+
+        <section class="page-heading">
+
+            <div class="heading-icon">
+                🌾
+            </div>
+
+            <h1>
+                Tell us about your crop
+            </h1>
+
+            <p>
+                Upload photos of your affected crop
+                to help us identify the problem.
+            </p>
+
+        </section>
+
+
+        <!-- ================= FORM ================= -->
+
+        <form
+            id="cropForm"
+            method="POST"
+            enctype="multipart/form-data"
+            class="crop-form"
+        >
+
+            {% csrf_token %}
+
+
+            <!-- ================= CROP PHOTOS ================= -->
+
+            <section class="card">
+
+                <div class="card-title">
+
+                    <div class="title-icon">
+                        📷
+                    </div>
+
+                    <div>
+                        <h2>
+                            Crop Photos
+                        </h2>
+
+                        <p>
+                            Upload up to 4 photos of the affected crop
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= IMAGE GRID ================= -->
+
+                <div class="image-grid">
+
+
+                    <!-- ================= IMAGE 1 ================= -->
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            name="disease_img_1"
+                            id="disease_img_1"
+                            accept="image/*"
+                            data-preview="preview1"
+                            data-remove="remove1"
+                        >
+
+                        <label
+                            for="disease_img_1"
+                            class="upload-box"
+                        >
+
+                            <div
+                                class="preview"
+                                id="preview1"
+                            >
+
+                                <span class="camera">
+                                    📷
+                                </span>
+
+                                <strong>
+                                    Add Photo 1
+                                </strong>
+
+                                <small>
+                                    Camera or Gallery
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            id="remove1"
+                            aria-label="Remove image 1"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================= IMAGE 2 ================= -->
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            name="disease_img_2"
+                            id="disease_img_2"
+                            accept="image/*"
+                            data-preview="preview2"
+                            data-remove="remove2"
+                        >
+
+                        <label
+                            for="disease_img_2"
+                            class="upload-box"
+                        >
+
+                            <div
+                                class="preview"
+                                id="preview2"
+                            >
+
+                                <span class="camera">
+                                    📷
+                                </span>
+
+                                <strong>
+                                    Add Photo 2
+                                </strong>
+
+                                <small>
+                                    Camera or Gallery
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            id="remove2"
+                            aria-label="Remove image 2"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================= IMAGE 3 ================= -->
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            name="disease_img_3"
+                            id="disease_img_3"
+                            accept="image/*"
+                            data-preview="preview3"
+                            data-remove="remove3"
+                        >
+
+                        <label
+                            for="disease_img_3"
+                            class="upload-box"
+                        >
+
+                            <div
+                                class="preview"
+                                id="preview3"
+                            >
+
+                                <span class="camera">
+                                    📷
+                                </span>
+
+                                <strong>
+                                    Add Photo 3
+                                </strong>
+
+                                <small>
+                                    Camera or Gallery
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            id="remove3"
+                            aria-label="Remove image 3"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ================= IMAGE 4 ================= -->
+
+                    <div class="image-upload">
+
+                        <input
+                            type="file"
+                            name="disease_img_4"
+                            id="disease_img_4"
+                            accept="image/*"
+                            data-preview="preview4"
+                            data-remove="remove4"
+                        >
+
+                        <label
+                            for="disease_img_4"
+                            class="upload-box"
+                        >
+
+                            <div
+                                class="preview"
+                                id="preview4"
+                            >
+
+                                <span class="camera">
+                                    📷
+                                </span>
+
+                                <strong>
+                                    Add Photo 4
+                                </strong>
+
+                                <small>
+                                    Camera or Gallery
+                                </small>
+
+                            </div>
+
+                        </label>
+
+
+                        <button
+                            type="button"
+                            class="remove"
+                            id="remove4"
+                            aria-label="Remove image 4"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= TIP ================= -->
+
+                <div class="photo-tip">
+
+                    <span class="tip-icon">
+                        💡
+                    </span>
+
+                    <span>
+                        Upload clear photos showing affected
+                        leaves, fruits or stems for better results.
+                    </span>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= SUBMIT ================= -->
+
+            <section class="submit-section">
+
+                <div class="privacy">
+                    🔒 Your information is secure and private.
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="analyze-button"
+                    id="submitButton"
+                >
+
+                    <span>
+                        🌱 Analyze My Crop
+                    </span>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </section>
+
+        </form>
+
+    </main>
+
+</div>
+
+
+<!-- IMPORTANT:
+     Put this file at:
+     static/scripts/crop_doctor_img.js
+-->
+
+<script
+    src="{% static 'scripts/crop_doctor_img.js' %}?v=2"
+    defer
+></script>
+
+</body>
+
+</html>
+
