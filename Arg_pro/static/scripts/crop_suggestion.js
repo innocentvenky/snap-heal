@@ -1,14 +1,29 @@
 
+/* ============================================================
+   SNAP-HEAL
+   SMART CROP RECOMMENDATION
+   VOICE INPUT + TEXT TO SPEECH
+   ============================================================ */
+
+
+/* ============================================================
+   GLOBAL VARIABLES
+   ============================================================ */
+
 let selectedLang = "en-IN";
 
 let recognition = null;
 
 let isListening = false;
 
+let currentVoiceInput = null;
+
+let currentMicButton = null;
+
 
 /* ============================================================
    LANGUAGE PROMPTS
-============================================================ */
+   ============================================================ */
 
 const prompts = {
 
@@ -139,7 +154,7 @@ const prompts = {
 
 /* ============================================================
    INITIALIZE
-============================================================ */
+   ============================================================ */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -150,6 +165,10 @@ document.addEventListener(
         );
 
 
+        /* --------------------------------------------------------
+           LANGUAGE SELECT
+        -------------------------------------------------------- */
+
         const langSelect =
             document.getElementById(
                 "langSelect"
@@ -159,7 +178,13 @@ document.addEventListener(
         if (langSelect) {
 
             selectedLang =
-                langSelect.value;
+                langSelect.value || "en-IN";
+
+
+            console.log(
+                "🌐 Initial language:",
+                selectedLang
+            );
 
 
             langSelect.addEventListener(
@@ -167,10 +192,25 @@ document.addEventListener(
                 function () {
 
                     selectedLang =
-                        this.value;
+                        this.value || "en-IN";
+
+
+                    const languageInput =
+                        document.getElementById(
+                            "languageInput"
+                        );
+
+
+                    if (languageInput) {
+
+                        languageInput.value =
+                            selectedLang;
+
+                    }
+
 
                     console.log(
-                        "Language:",
+                        "🌐 Language changed:",
                         selectedLang
                     );
 
@@ -180,7 +220,23 @@ document.addEventListener(
         }
 
 
+        /* --------------------------------------------------------
+           INITIALIZE SPEECH RECOGNITION
+        -------------------------------------------------------- */
+
         initializeSpeechRecognition();
+
+
+        /* --------------------------------------------------------
+           INITIALIZE MICROPHONE BUTTONS
+        -------------------------------------------------------- */
+
+        initializeMicrophoneButtons();
+
+
+        /* --------------------------------------------------------
+           INITIALIZE SAVE BUTTON
+        -------------------------------------------------------- */
 
         initializeSaveButton();
 
@@ -189,8 +245,8 @@ document.addEventListener(
 
 
 /* ============================================================
-   SPEECH RECOGNITION
-============================================================ */
+   SPEECH RECOGNITION INITIALIZATION
+   ============================================================ */
 
 function initializeSpeechRecognition() {
 
@@ -201,9 +257,15 @@ function initializeSpeechRecognition() {
 
     if (!SpeechRecognition) {
 
-        console.warn(
-            "Speech Recognition is not supported in this browser."
+        console.error(
+            "❌ Speech Recognition is not supported."
         );
+
+
+        showStatus(
+            "⚠️ Speech recognition is not supported in this browser."
+        );
+
 
         return;
 
@@ -221,24 +283,62 @@ function initializeSpeechRecognition() {
     recognition.maxAlternatives = 1;
 
 
+    /* --------------------------------------------------------
+       START
+    -------------------------------------------------------- */
+
     recognition.onstart =
         function () {
 
             isListening = true;
 
+
             console.log(
-                "🎙️ Listening..."
+                "🎙️ Microphone listening..."
+            );
+
+
+            updateMicButtonState(
+                true
+            );
+
+
+            showStatus(
+                "🎙️ Listening... Please speak now."
             );
 
         };
 
 
+    /* --------------------------------------------------------
+       RESULT
+    -------------------------------------------------------- */
+
     recognition.onresult =
         function (event) {
 
-            const transcript =
+            console.log(
+                "🎤 Speech result received:",
                 event
-                    .results[0][0]
+            );
+
+
+            if (
+                !event.results ||
+                !event.results.length
+            ) {
+
+                console.warn(
+                    "⚠️ No speech result."
+                );
+
+                return;
+
+            }
+
+
+            const transcript =
+                event.results[0][0]
                     .transcript
                     .trim();
 
@@ -249,13 +349,26 @@ function initializeSpeechRecognition() {
             );
 
 
-            if (
-                window.currentVoiceInput
-            ) {
+            if (!transcript) {
+
+                showStatus(
+                    "⚠️ I could not understand your speech. Please try again."
+                );
+
+                return;
+
+            }
+
+
+            /* ------------------------------------------------
+               FIND CURRENT INPUT
+            ------------------------------------------------ */
+
+            if (currentVoiceInput) {
 
                 const input =
                     document.getElementById(
-                        window.currentVoiceInput
+                        currentVoiceInput
                     );
 
 
@@ -274,34 +387,165 @@ function initializeSpeechRecognition() {
                         )
                     );
 
+
+                    input.dispatchEvent(
+                        new Event(
+                            "change",
+                            {
+                                bubbles: true
+                            }
+                        )
+                    );
+
+
+                    console.log(
+                        "✅ Transcript inserted into:",
+                        currentVoiceInput
+                    );
+
+
+                    showStatus(
+                        "✅ " + transcript
+                    );
+
                 }
+
+                else {
+
+                    console.error(
+                        "❌ Input element not found:",
+                        currentVoiceInput
+                    );
+
+                }
+
+            }
+
+            else {
+
+                console.warn(
+                    "⚠️ No current voice input selected."
+                );
 
             }
 
 
             isListening = false;
 
+
+            updateMicButtonState(
+                false
+            );
+
         };
 
+
+    /* --------------------------------------------------------
+       ERROR
+    -------------------------------------------------------- */
 
     recognition.onerror =
         function (event) {
 
+            isListening = false;
+
+
+            updateMicButtonState(
+                false
+            );
+
+
             console.error(
-                "Speech recognition error:",
+                "❌ Speech recognition error:",
                 event.error
             );
 
 
-            isListening = false;
+            let message =
+                "Voice recognition failed.";
+
+
+            switch (
+                event.error
+            ) {
+
+                case "not-allowed":
+
+                    message =
+                        "Please allow microphone permission in your browser.";
+
+                    break;
+
+
+                case "service-not-allowed":
+
+                    message =
+                        "Speech recognition service is not allowed.";
+
+                    break;
+
+
+                case "no-speech":
+
+                    message =
+                        "I could not hear you. Please speak again.";
+
+                    break;
+
+
+                case "audio-capture":
+
+                    message =
+                        "No microphone was detected.";
+
+                    break;
+
+
+                case "network":
+
+                    message =
+                        "Speech recognition needs an internet connection.";
+
+                    break;
+
+
+                case "aborted":
+
+                    message =
+                        "Voice input was stopped.";
+
+                    break;
+
+
+                default:
+
+                    message =
+                        "Voice recognition failed. Please try again.";
+
+            }
+
+
+            showStatus(
+                "⚠️ " + message
+            );
 
         };
 
+
+    /* --------------------------------------------------------
+       END
+    -------------------------------------------------------- */
 
     recognition.onend =
         function () {
 
             isListening = false;
+
+
+            updateMicButtonState(
+                false
+            );
+
 
             console.log(
                 "🎙️ Listening stopped"
@@ -313,8 +557,110 @@ function initializeSpeechRecognition() {
 
 
 /* ============================================================
-   VOICE FIELD ACTIVATION
-============================================================ */
+   MICROPHONE BUTTON INITIALIZATION
+   ============================================================ */
+
+function initializeMicrophoneButtons() {
+
+    const micButtons =
+        document.querySelectorAll(
+            ".mic-btn"
+        );
+
+
+    console.log(
+        "🎙️ Microphone buttons found:",
+        micButtons.length
+    );
+
+
+    if (!micButtons.length) {
+
+        console.error(
+            "❌ No .mic-btn elements found."
+        );
+
+
+        return;
+
+    }
+
+
+    micButtons.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    const inputId =
+                        button.dataset.field;
+
+
+                    console.log(
+                        "🎙️ Microphone clicked:",
+                        inputId
+                    );
+
+
+                    if (!inputId) {
+
+                        console.error(
+                            "❌ data-field is missing."
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    const input =
+                        document.getElementById(
+                            inputId
+                        );
+
+
+                    if (!input) {
+
+                        console.error(
+                            "❌ Input not found:",
+                            inputId
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    currentMicButton =
+                        button;
+
+
+                    activateBlockVoice(
+                        inputId,
+                        inputId,
+                        "statusBox"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   ACTIVATE VOICE FOR FIELD
+   ============================================================ */
 
 function activateBlockVoice(
     inputId,
@@ -326,6 +672,20 @@ function activateBlockVoice(
         document.getElementById(
             "langSelect"
         )?.value || "en-IN";
+
+
+    currentVoiceInput =
+        inputId;
+
+
+    console.log(
+        "🎙️ Activating voice:",
+        {
+            inputId,
+            promptKey,
+            selectedLang
+        }
+    );
 
 
     const input =
@@ -343,9 +703,10 @@ function activateBlockVoice(
     if (!input) {
 
         console.error(
-            "Input not found:",
+            "❌ Input not found:",
             inputId
         );
+
 
         return;
 
@@ -358,17 +719,10 @@ function activateBlockVoice(
             "Voice recognition is not supported in this browser."
         );
 
+
         return;
 
     }
-
-
-    /* --------------------------------------------------------
-       SAVE WHICH INPUT SHOULD RECEIVE THE ANSWER
-    -------------------------------------------------------- */
-
-    window.currentVoiceInput =
-        inputId;
 
 
     /* --------------------------------------------------------
@@ -376,9 +730,21 @@ function activateBlockVoice(
     -------------------------------------------------------- */
 
     const question =
-        prompts[selectedLang]?.[
+        prompts[selectedLang]?.[promptKey] ||
+        prompts["en-IN"]?.[promptKey];
+
+
+    if (!question) {
+
+        console.error(
+            "❌ Voice prompt not found:",
             promptKey
-        ] || prompts["en-IN"][promptKey];
+        );
+
+
+        return;
+
+    }
 
 
     /* --------------------------------------------------------
@@ -388,7 +754,31 @@ function activateBlockVoice(
     if (status) {
 
         status.textContent =
-            "🎙️ " + question;
+            "🔊 " + question;
+
+    }
+
+
+    /* --------------------------------------------------------
+       STOP EXISTING RECOGNITION
+    -------------------------------------------------------- */
+
+    if (isListening) {
+
+        try {
+
+            recognition.stop();
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                "Recognition stop warning:",
+                error
+            );
+
+        }
 
     }
 
@@ -402,6 +792,15 @@ function activateBlockVoice(
         selectedLang,
         function () {
 
+            console.log(
+                "🔊 Question finished."
+            );
+
+
+            /* -----------------------------------------------
+               START LISTENING
+            ----------------------------------------------- */
+
             startRecognition(
                 inputId
             );
@@ -414,7 +813,7 @@ function activateBlockVoice(
 
 /* ============================================================
    START SPEECH RECOGNITION
-============================================================ */
+   ============================================================ */
 
 function startRecognition(
     inputId
@@ -422,36 +821,101 @@ function startRecognition(
 
     if (!recognition) {
 
+        console.error(
+            "❌ Recognition is not initialized."
+        );
+
+
         return;
 
     }
 
 
-    window.currentVoiceInput =
+    currentVoiceInput =
         inputId;
+
+
+    selectedLang =
+        document.getElementById(
+            "langSelect"
+        )?.value || "en-IN";
 
 
     recognition.lang =
         selectedLang;
 
 
+    console.log(
+        "🎙️ Starting recognition:",
+        {
+            inputId,
+            language: selectedLang
+        }
+    );
+
+
     try {
 
         recognition.start();
-
-        console.log(
-            "🎙️ Started recognition:",
-            selectedLang
-        );
 
     }
 
     catch (error) {
 
         console.warn(
-            "Recognition could not start:",
+            "⚠️ Recognition could not start:",
             error
         );
+
+
+        /*
+         * Chrome can throw InvalidStateError
+         * if recognition is already running.
+         */
+
+        if (
+            error.name ===
+            "InvalidStateError"
+        ) {
+
+            try {
+
+                recognition.stop();
+
+            }
+
+            catch (stopError) {
+
+                console.warn(
+                    stopError
+                );
+
+            }
+
+
+            setTimeout(
+                function () {
+
+                    try {
+
+                        recognition.start();
+
+                    }
+
+                    catch (retryError) {
+
+                        console.error(
+                            "❌ Recognition retry failed:",
+                            retryError
+                        );
+
+                    }
+
+                },
+                300
+            );
+
+        }
 
     }
 
@@ -460,7 +924,7 @@ function startRecognition(
 
 /* ============================================================
    TEXT TO SPEECH
-============================================================ */
+   ============================================================ */
 
 function speakText(
     text,
@@ -472,19 +936,64 @@ function speakText(
         !window.speechSynthesis
     ) {
 
+        console.warn(
+            "⚠️ Speech synthesis not supported."
+        );
+
+
+        showStatus(
+            "⚠️ Text-to-speech is not supported in this browser."
+        );
+
+
         if (callback) {
 
             callback();
 
         }
 
+
         return;
 
     }
 
 
+    if (!text) {
+
+        console.warn(
+            "⚠️ Empty speech text."
+        );
+
+
+        if (callback) {
+
+            callback();
+
+        }
+
+
+        return;
+
+    }
+
+
+    console.log(
+        "🔊 Speaking:",
+        text,
+        language
+    );
+
+
+    /* --------------------------------------------------------
+       STOP PREVIOUS SPEECH
+    -------------------------------------------------------- */
+
     window.speechSynthesis.cancel();
 
+
+    /* --------------------------------------------------------
+       CREATE UTTERANCE
+    -------------------------------------------------------- */
 
     const utterance =
         new SpeechSynthesisUtterance(
@@ -508,9 +1017,105 @@ function speakText(
         1;
 
 
+    /* --------------------------------------------------------
+       FIND BEST VOICE
+    -------------------------------------------------------- */
+
+    const voices =
+        window.speechSynthesis.getVoices();
+
+
+    console.log(
+        "🔊 Available voices:",
+        voices.length
+    );
+
+
+    const languagePrefix =
+        language.split("-")[0];
+
+
+    let selectedVoice =
+        voices.find(
+            function (voice) {
+
+                return (
+                    voice.lang === language
+                );
+
+            }
+        );
+
+
+    if (!selectedVoice) {
+
+        selectedVoice =
+            voices.find(
+                function (voice) {
+
+                    return (
+                        voice.lang &&
+                        voice.lang.startsWith(
+                            languagePrefix
+                        )
+                    );
+
+                }
+            );
+
+    }
+
+
+    if (selectedVoice) {
+
+        utterance.voice =
+            selectedVoice;
+
+
+        console.log(
+            "🔊 Selected voice:",
+            selectedVoice.name,
+            selectedVoice.lang
+        );
+
+    }
+
+    else {
+
+        console.warn(
+            "⚠️ No matching voice found for:",
+            language
+        );
+
+    }
+
+
+    /* --------------------------------------------------------
+       SPEECH START
+    -------------------------------------------------------- */
+
+    utterance.onstart =
+        function () {
+
+            console.log(
+                "🔊 Speech started"
+            );
+
+        };
+
+
+    /* --------------------------------------------------------
+       SPEECH END
+    -------------------------------------------------------- */
+
     utterance.onend =
         function () {
 
+            console.log(
+                "🔊 Speech ended"
+            );
+
+
             if (callback) {
 
                 callback();
@@ -519,29 +1124,100 @@ function speakText(
 
         };
 
+
+    /* --------------------------------------------------------
+       SPEECH ERROR
+    -------------------------------------------------------- */
 
     utterance.onerror =
-        function () {
+        function (event) {
+
+            console.error(
+                "❌ Speech synthesis error:",
+                event.error
+            );
+
+
+            /*
+             * Even if TTS fails, continue
+             * to microphone recognition.
+             */
 
             if (callback) {
 
-                callback();
+                setTimeout(
+                    function () {
+
+                        callback();
+
+                    },
+                    200
+                );
 
             }
 
         };
 
 
-    window.speechSynthesis.speak(
-        utterance
-    );
+    /* --------------------------------------------------------
+       SPEAK
+    -------------------------------------------------------- */
+
+    try {
+
+        window.speechSynthesis.speak(
+            utterance
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "❌ Could not start speech:",
+            error
+        );
+
+
+        if (callback) {
+
+            callback();
+
+        }
+
+    }
+
+}
+
+
+/* ============================================================
+   LOAD VOICES
+   ============================================================ */
+
+if (
+    window.speechSynthesis
+) {
+
+    window.speechSynthesis.onvoiceschanged =
+        function () {
+
+            const voices =
+                window.speechSynthesis.getVoices();
+
+
+            console.log(
+                "🔊 Voices loaded:",
+                voices.length
+            );
+
+        };
 
 }
 
 
 /* ============================================================
    LADY SPEAK COMPATIBILITY
-============================================================ */
+   ============================================================ */
 
 function ladySpeak(
     text,
@@ -558,8 +1234,86 @@ function ladySpeak(
 
 
 /* ============================================================
+   SHOW STATUS
+   ============================================================ */
+
+function showStatus(
+    message
+) {
+
+    const status =
+        document.getElementById(
+            "statusBox"
+        );
+
+
+    if (status) {
+
+        status.textContent =
+            message;
+
+    }
+
+}
+
+
+/* ============================================================
+   MICROPHONE BUTTON UI
+   ============================================================ */
+
+function updateMicButtonState(
+    listening
+) {
+
+    const buttons =
+        document.querySelectorAll(
+            ".mic-btn"
+        );
+
+
+    buttons.forEach(
+        function (button) {
+
+            if (listening) {
+
+                if (
+                    button ===
+                    currentMicButton
+                ) {
+
+                    button.classList.add(
+                        "listening"
+                    );
+
+
+                    button.textContent =
+                        "🔴";
+
+                }
+
+            }
+
+            else {
+
+                button.classList.remove(
+                    "listening"
+                );
+
+
+                button.textContent =
+                    "🎙️";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ============================================================
    SAVE BUTTON
-============================================================ */
+   ============================================================ */
 
 function initializeSaveButton() {
 
@@ -578,8 +1332,9 @@ function initializeSaveButton() {
     if (!saveBtn) {
 
         console.error(
-            "❌ saveBtn not found"
+            "❌ saveBtn not found."
         );
+
 
         return;
 
@@ -589,8 +1344,9 @@ function initializeSaveButton() {
     if (!form) {
 
         console.error(
-            "❌ cropForm not found"
+            "❌ cropForm not found."
         );
+
 
         return;
 
@@ -609,14 +1365,28 @@ function initializeSaveButton() {
             );
 
 
-            /* ------------------------------------------------
-               UPDATE LANGUAGE
-            ------------------------------------------------ */
-
             selectedLang =
                 document.getElementById(
                     "langSelect"
                 )?.value || "en-IN";
+
+
+            /* ------------------------------------------------
+               UPDATE LANGUAGE HIDDEN FIELD
+            ------------------------------------------------ */
+
+            const languageInput =
+                document.getElementById(
+                    "languageInput"
+                );
+
+
+            if (languageInput) {
+
+                languageInput.value =
+                    selectedLang;
+
+            }
 
 
             /* ------------------------------------------------
@@ -626,71 +1396,49 @@ function initializeSaveButton() {
             const data = {
 
                 soilType:
-                    getValue(
-                        "soilType"
-                    ),
+                    getValue("soilType"),
 
                 soilPh:
-                    getValue(
-                        "soilPh"
-                    ),
+                    getValue("soilPh"),
 
                 organicCarbon:
-                    getValue(
-                        "organicCarbon"
-                    ),
+                    getValue("organicCarbon"),
 
                 location:
-                    getValue(
-                        "location"
-                    ),
+                    getValue("location"),
 
                 pincode:
-                    getValue(
-                        "pincode"
-                    ),
+                    getValue("pincode"),
 
                 farmArea:
-                    getValue(
-                        "farmArea"
-                    ),
+                    getValue("farmArea"),
 
                 irrigation:
-                    getValue(
-                        "irrigation"
-                    ),
+                    getValue("irrigation"),
 
                 waterSource:
-                    getValue(
-                        "waterSource"
-                    ),
+                    getValue("waterSource"),
 
                 plantingDate:
-                    getValue(
-                        "plantingDate"
-                    ),
+                    getValue("plantingDate"),
 
                 previousCrop:
-                    getValue(
-                        "previousCrop"
-                    ),
+                    getValue("previousCrop"),
 
                 desiredCrop:
-                    getValue(
-                        "desiredCrop"
-                    )
+                    getValue("desiredCrop")
 
             };
 
 
             console.log(
-                "FORM DATA:",
+                "🌱 FORM DATA:",
                 data
             );
 
 
             /* ------------------------------------------------
-               VALIDATION
+               REQUIRED FIELDS
             ------------------------------------------------ */
 
             const requiredFields = [
@@ -755,12 +1503,21 @@ function initializeSaveButton() {
             }
 
 
+            /* ------------------------------------------------
+               VALIDATION
+            ------------------------------------------------ */
+
             if (missingField) {
 
                 const message =
                     getValidationMessage(
                         selectedLang
                     );
+
+
+                showStatus(
+                    "⚠️ " + message
+                );
 
 
                 speakText(
@@ -798,14 +1555,6 @@ function initializeSaveButton() {
                     );
 
 
-                    /*
-                     * IMPORTANT:
-                     *
-                     * Nothing is saved yet.
-                     *
-                     * Show browser confirmation.
-                     */
-
                     showSaveConfirmation();
 
                 }
@@ -819,7 +1568,7 @@ function initializeSaveButton() {
 
 /* ============================================================
    GET INPUT VALUE
-============================================================ */
+   ============================================================ */
 
 function getValue(
     id
@@ -845,7 +1594,7 @@ function getValue(
 
 /* ============================================================
    SAVE CONFIRMATION
-============================================================ */
+   ============================================================ */
 
 function showSaveConfirmation() {
 
@@ -869,8 +1618,6 @@ function showSaveConfirmation() {
 
 
     /*
-     * SIMPLE BROWSER POPUP
-     *
      * OK     → Save
      * Cancel → Do nothing
      */
@@ -890,7 +1637,7 @@ function showSaveConfirmation() {
     else {
 
         console.log(
-            "❌ User cancelled save"
+            "❌ User cancelled save."
         );
 
     }
@@ -900,7 +1647,7 @@ function showSaveConfirmation() {
 
 /* ============================================================
    SUBMIT FORM
-============================================================ */
+   ============================================================ */
 
 function submitCropForm() {
 
@@ -913,8 +1660,9 @@ function submitCropForm() {
     if (!form) {
 
         console.error(
-            "❌ Crop form not found"
+            "❌ Crop form not found."
         );
+
 
         return;
 
@@ -927,10 +1675,7 @@ function submitCropForm() {
 
 
     /*
-     * IMPORTANT:
-     *
-     * This is the ONLY place where
-     * the form is submitted.
+     * ONLY HERE THE FORM IS SUBMITTED.
      */
 
     form.submit();
@@ -940,7 +1685,7 @@ function submitCropForm() {
 
 /* ============================================================
    VALIDATION MESSAGE
-============================================================ */
+   ============================================================ */
 
 function getValidationMessage(
     language
@@ -955,7 +1700,7 @@ function getValidationMessage(
             "కొనసాగించే ముందు దయచేసి అన్ని అవసరమైన వివరాలను నమోదు చేయండి.",
 
         "hi-IN":
-            "आगे बढ़ने से पहले कृपया सभी आवश्यक जानकारी भरें।"
+            "आगे बढ़ने से पहले कृपया सभी आवश्यक जानकारी दर्ज करें।"
 
     };
 
@@ -970,7 +1715,7 @@ function getValidationMessage(
 
 /* ============================================================
    BUILD SUMMARY
-============================================================ */
+   ============================================================ */
 
 function buildSummary(
     language,
@@ -982,6 +1727,7 @@ function buildSummary(
     ) {
 
         return (
+
             "మీ వ్యవసాయ వివరాలు సిద్ధంగా ఉన్నాయి. " +
 
             "నేల రకం: " +
@@ -1015,10 +1761,12 @@ function buildSummary(
             data.previousCrop +
 
             ", కావలసిన పంట: " +
+
             (
                 data.desiredCrop ||
                 "ఏదైనా సరైన పంట"
             )
+
         );
 
     }
@@ -1029,6 +1777,7 @@ function buildSummary(
     ) {
 
         return (
+
             "आपके खेत की जानकारी तैयार है। " +
 
             "मिट्टी का प्रकार: " +
@@ -1062,16 +1811,19 @@ function buildSummary(
             data.previousCrop +
 
             ", वांछित फसल: " +
+
             (
                 data.desiredCrop ||
                 "कोई उपयुक्त फसल"
             )
+
         );
 
     }
 
 
     return (
+
         "Your farm information is ready. " +
 
         "Soil type: " +
@@ -1105,10 +1857,21 @@ function buildSummary(
         data.previousCrop +
 
         ", desired crop: " +
+
         (
             data.desiredCrop ||
             "any suitable crop"
         )
+
     );
 
 }
+
+
+/* ============================================================
+   DEBUG HELPER
+   ============================================================ */
+
+console.log(
+    "🌱 Snap-Heal voice module ready."
+);
