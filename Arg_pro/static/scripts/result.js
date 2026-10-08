@@ -6,29 +6,27 @@
 
 const loadingMessages = [
 
-    "🌱 Analyzing your crop...",
-    
-    "📍 Detecting farm location...",
+    "🌱 Analyzing your crop information...",
 
-    "🌡️ Analyzing weather conditions...",
+    "📷 Reviewing submitted crop photos...",
 
-    "🔍 Studying the reported symptoms...",
+    "🔍 Identifying visible crop symptoms...",
 
-    "📷 Reviewing crop information...",
+    "🧠 Evaluating the possible crop problem...",
 
-    "🧠 Identifying possible crop diseases...",
+    "🐛 Checking natural pest-management options...",
 
-    "🌿 Preparing crop treatment advice...",
+    "🍃 Checking natural disease-management options...",
 
-    "💧 Preparing irrigation recommendations...",
+    "🌿 Selecting suitable natural farming inputs...",
 
-    "🌾 Preparing fertilizer recommendations...",
+    "💧 Checking spray and drip application timing...",
 
-    "🐛 Checking pest management options...",
+    "🧪 Preparing natural treatment steps...",
 
-    "🛡️ Preparing disease management guidance...",
+    "📋 Preparing the 3-treatment farming schedule...",
 
-    "📋 Preparing your final crop advisory..."
+    "🌾 Preparing the final crop advisory..."
 
 ];
 
